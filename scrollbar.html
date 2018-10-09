@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>演示：jQuery.nicescroll美化滚动条</title>
+    <meta name="keywords" content="美化滚动条,jquery.nicescroll" />
+    <meta name="description" content="jQuery滚动条插件兼容ie6+、手机、ipad。" />
+    <style type="text/css">
+        /*            body{height:3000px}*/
+        #content {
+            width: 220px;
+            height: 300px;
+            margin: 10px auto;
+            padding-right: 12px;
+            overflow: hidden;
+        }
+
+        #content p {
+            color: #999;
+            font-size: 12px;
+            margin: 30px 0;
+            text-align: left;
+            text-indent: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="demo">
+            <h2 class="title">jQuery.nicescroll美化滚动条</h2>
+            <div id="content">
+                <h2>JQuery特点</h2>
+                <p>1、JQuery是继prototype之后又一个优秀的Javascript库。</p>
+                <p>2、它是轻量级的js库 ，它兼容CSS3</p>
+                <p>3、jQuery2.0及后续版本将不再支持IE6/7/8浏览器</p>
+                <p>4、jQuery使用户能更方便地处理HTML</p>
+                <p>
+                    5、jQuery是一个兼容多浏览器的javascript库：点击
+                    <a href="#">查看</a>
+                    。
+                </p>
+                <p>6、核心理念是write less,do more(写得更少,做得更多)。</p>
+                <p>7、jQuery在2006年1月由美国人John Resig在纽约的barcamp发布。</p>
+                <h2>特点</h2>
+                <div class="customer-service">
+                    <p>
+                        1、动态特效
+                        <strong class="red">10</strong>
+                        AJAX
+                    </p>
+                    <p>
+                        2、通过插件来扩展
+                        <strong class="red">5</strong>
+                        方便的工具 - 例如浏览器版本判断
+                        <strong class="red">100</strong>
+                        渐进增强
+                        <a href="#">签到</a>
+                        。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.js"></script>
+    <script type="text/javascript">
+        $('#content').niceScroll({
+            cursorcolor: "#ccc", //#CC0071 光标颜色
+            cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+            touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+            cursorwidth: "5px", //像素光标的宽度
+            cursorborder: "0", // 	游标边框css定义
+            cursorborderradius: "5px", //以像素为光标边界半径
+            autohidemode: false //是否隐藏滚动条
+        });
+    </script>
+</body>
+
+</html>

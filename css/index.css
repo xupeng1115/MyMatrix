@@ -1,0 +1,82 @@
+@charset "utf-8";
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+}
+
+html,body{
+    position:relative;
+    width:100%;
+    height:100%;
+    background:#fff;
+    font-family: Arial,"Helvetica Neue","Microsoft YaHei","\5FAE\8F6F\96C5\9ED1","PingFang SC";
+}
+
+.clearfix{
+	visibility:hidden;
+	display:block;
+	font-size:0;
+	content:" ";
+	clear:both;
+	height:0;
+	*zoom:1;
+}
+
+ul{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+a{
+	color:#6d6d6d;
+    text-decoration: none; 
+}
+
+a:link,
+a:active,
+a:visited,
+a:hover{
+	text-decoration:none;
+	color:#6d6d6d;
+}
+
+input:-moz-placeholder,   
+textarea:-moz-placeholder {   
+    color: #999999;   
+}   
+
+input:-ms-input-placeholder,   
+textarea:-ms-input-placeholder {   
+    color: #999999;   
+}   
+
+input::-webkit-input-placeholder,   
+textarea::-webkit-input-placeholder {   
+    color: #999999;   
+} 
+
+.overflow_text{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+.clearbox::after{
+	display:block;
+	content:"";
+	clear:both;
+}
+
+
+/*******************************矩阵题********************************/
+
+
+
+
+
+
+

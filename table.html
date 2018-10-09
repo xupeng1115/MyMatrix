@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+
+    <title>固定表头和首列的表格</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.7.0/css/perfect-scrollbar.css"> -->
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        html,body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #fff;
+        }
+        .container-fluid {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        /* .clearfix:before, .clearfix:after, .dl-horizontal dd:before, .dl-horizontal dd:after, .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after {
+            display: table;
+            content: " ";
+        } */
+        table{
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+            border-spacing: 0;
+            border-collapse: collapse;
+            background-color: transparent;
+        }
+
+        .table-bordered{
+            /* border:1px solid #ddd; */
+        }
+
+        .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+
+        .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+            border: 1px solid #ddd;
+        }
+
+        #left_div {
+            width: 100px;
+            float: left;
+        }
+
+        #left_div1 {
+            width: 100%;
+        }
+
+        #left_div2 {
+            margin-top: -20px;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        #left_table1 th {
+            background: #E9F8FF;
+            text-align: center;
+        }
+
+        #left_table2 th {
+            text-align: center;
+        }
+
+        #right_div {
+            float: left;
+        }
+
+        #right_div1 {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #right_divx {
+            width: 900px;
+        }
+
+        #right_div2 {
+            position:relative;
+            margin-top: -20px;
+            width: 100%;
+            height: 400px;
+            overflow:hidden;
+        }
+
+        #right_table1 {
+            width: 880px;
+        }
+
+        #right_table2 {
+            /**width和max-width一起写，手机浏览器打开也能固定长度**/
+            width: 880px;
+            max-width: 880px;
+            white-space: nowrap;
+        }
+
+        #right_table1 th {
+            background: #E9F8FF;
+            text-align: center;
+            width: 10%;
+        }
+
+        #right_table2 td {
+            width: 10%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div id="left_div">
+            <div id="left_div1">
+                <table id="left_table1" class="table table-bordered">
+                    <tr>
+                        <th>我不会动</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="left_div2">
+                <table id="left_table2" class="table table-bordered">
+                </table>
+            </div>
+        </div>
+        <div id="right_div">
+            <div id="right_div1">
+                <div id="right_divx">
+                    <table id="right_table1" class="table table-bordered">
+                        <tr>
+                            <th>我是表头</th>
+                            <th>我是表头</th>
+                            <th>我是表头</th>
+                            <th>我是表头</th>
+                            <th>我是表头</th>
+                            <th>我是表头</th>
+                            <th>我是表头</th>
+                            <th>我是表头</th>
+                            <th>我是表头</th>
+                            <th>我是表头</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="right_div2">
+                <table id="right_table2" class="table table-bordered">
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/knockout-3.4.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.7.0/js/perfect-scrollbar.jquery.js"></script> -->
+    <script type="text/javascript" src="js/jquery.nicescroll.js"></script>
+    <script type="text/javascript">
+        //固定和滚动
+        var right_div2 = document.getElementById("right_div2");
+        right_div2.onscroll = function () {
+            var right_div2_top = this.scrollTop;
+            var right_div2_left = this.scrollLeft;
+            document.getElementById("left_div2").scrollTop = right_div2_top;
+            document.getElementById("right_div1").scrollLeft = right_div2_left;
+        }
+        
+        setResizeWidth();
+
+        for (var i = 0; i < 24; i++) {
+            $("#left_table2").append("<tr><th>我是首列</th></tr>");
+        }
+
+        for (var i = 0; i < 24; i++) {
+            $("#right_table2").append("<tr><td>" + i + "</td><td>" + i + "</td><td>" + i + "</td><td>" + i +
+                "</td><td>" + i + "</td><td>" + i + "</td><td>" + i + "</td><td>" + i + "</td><td>" + i +
+                "</td><td>" + i + "</td></tr>");
+        }
+
+        window.onresize=function(){
+            setResizeWidth();
+        }
+
+        //设置右边div宽度
+        function setResizeWidth(){
+            document.getElementById("right_div").style.width = "" + document.documentElement.clientWidth - 130 + "px";
+            setInterval(function () {
+                document.getElementById("right_div").style.width = "" + document.documentElement.clientWidth - 130 +
+                    "px";
+            }, 0);
+        }
+
+        $('#right_div2').niceScroll({
+            cursorcolor: "#ccc", //#CC0071 光标颜色
+            cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+            touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+            cursorwidth: "5px", //像素光标的宽度
+            cursorborder: "0", // 	游标边框css定义
+            cursorborderradius: "5px", //以像素为光标边界半径
+            autohidemode: false,//是否隐藏滚动条
+            scrollspeed: 10,  // 滚动速度
+            mousescrollstep: 9 * 4,  // 鼠标滚动的滚动速度（像素）
+        });
+
+
+        //当元素内容大小改变时重置滚动条
+        // 隐藏滚动条：（当在同一页面中使用多个nicescroll插件时，要及时隐藏用完的nicescroll对象，加载时，需要先show,再resize。）
+        // $("#right_div2").getNiceScroll().remove();
+        // $('#right_div2').niceScroll({
+        //     cursorcolor: "#ccc", //#CC0071 光标颜色
+        //     cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+        //     touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+        //     cursorwidth: "5px", //像素光标的宽度
+        //     cursorborder: "0", // 	游标边框css定义
+        //     cursorborderradius: "5px", //以像素为光标边界半径
+        //     autohidemode: false,//是否隐藏滚动条
+        //     scrollspeed: 10,  // 滚动速度
+        //     mousescrollstep: 9 * 4,  // 鼠标滚动的滚动速度（像素）
+        // });
+        // $("#right_div2").getNiceScroll().resize();
+
+        // var ps=new PerfectScrollbar("right_div2",{
+        //     wheelSpeed:2
+        // })
+
+
+
+    </script>
+</body>
+
+</html>
