@@ -52,7 +52,7 @@
         table {
             width: 100%;
             max-width: 100%;
-            margin-bottom: 20px;
+            /* margin-bottom: 20px; */
             border-spacing: 0;
             border-collapse: collapse;
             background-color: transparent;
@@ -72,7 +72,7 @@
         }
 
         .left_div2 {
-            margin-top: -20px;
+            /* margin-top: -20px; */
             width: 100%;
             height: 400px;
             overflow: hidden;
@@ -110,7 +110,7 @@
 
         .right_div2 {
             position: relative;
-            margin-top: -20px;
+            /* margin-top: -20px; */
             width: 100%;
             height: 400px;
             overflow: hidden;
@@ -235,30 +235,28 @@
     <script type="text/javascript" src="js/jquery.nicescroll.js"></script>
     <script type="text/javascript">
         (function($) {
+
             //子元素滚动同时禁止父元素滚动
             $.fn.uniqueScroll = function () {
                 //兼容火狐获取滚轮事件
                 $(this).on('mousewheel', _pc)
                     .on('DOMMouseScroll', _pc);
 
+                //PC端滚轮到底、到顶禁止父元素滚动条滚动
                 function _pc(e) {
-
                     var scrollTop = $(this)[0].scrollTop,
                         scrollHeight = $(this)[0].scrollHeight,
                         height = $(this)[0].clientHeight;
-
-                    //兼容Opera10+获取滚轮事件滚动方向
-                    var delta = (e.originalEvent.wheelDelta) ? e.originalEvent.wheelDelta : -(e.originalEvent.detail ||
-                        0);
-
-                    if ((delta > 0 && scrollTop <= delta) || (delta < 0 && scrollHeight - height - scrollTop <=
-                            -1 * delta)) {
+                        
+                    var delta = (e.originalEvent.wheelDelta) ? e.originalEvent.wheelDelta : -(e.originalEvent.detail || 0);
+                    if ((delta > 0 && scrollTop <= delta) || (delta < 0 && scrollHeight - height - scrollTop <= -1 * delta)) {
                         this.scrollTop = delta > 0 ? 0 : scrollHeight;
                         e.stopPropagation();
                         e.preventDefault();
                     }
                 }
 
+                //移动端滚轮到底、到顶禁止父元素滚动条滚动
                 $(this).on('touchstart', function (e) {
                     var targetTouches = e.targetTouches ? e.targetTouches : e.originalEvent.targetTouches;
                     $(this)[0].tmPoint = {
@@ -301,8 +299,10 @@
                 }
             };
 
-            //监听滚动并同步滚动
+            //禁止元素滚动时父元素同步滚动
             $(".right_div2").uniqueScroll();
+            
+            //监听元素滚动时同步滚动其他元素
             $(".right_div2").on("scroll", function (e) {
                 var right_div2_top = $(this)[0].scrollTop;
                 var right_div2_left = $(this)[0].scrollLeft;
@@ -310,8 +310,10 @@
                 $(this).parent().find(".right_div1")[0].scrollLeft = right_div2_left;
             })
 
+            //动态设置滚动元素容器宽度
             setResizeWidth();
-
+            
+            //动态渲染相关元素内容
             var leftTable2 = $(".left_table2");
             var rightTable2 = $(".right_table2");
             for (var i = 0; i < 24; i++) {
@@ -325,7 +327,8 @@
                         "</td><td>" + i + "</td></tr>");
                 }
             }
-
+            
+            //页面宽度变化时动态设置滚动元素宽度
             window.onresize = function () {
                 setResizeWidth();
             }
@@ -337,7 +340,8 @@
                     rightDiv[i].style.width = "" + document.documentElement.clientWidth - 200 + "px";
                 }
             }
-
+            
+            //设置元素自定义滚动条
             $(".right_div2").niceScroll({
                 cursorcolor: "#ccc", //#CC0071 光标颜色
                 cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0

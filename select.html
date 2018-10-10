@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/knockout-3.4.2.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div data-bind="text:personName"></div>
+        <div>
+            <select data-bind="options:selectLists"></select>
+        </div>
+        <div>
+            <select data-bind="options:selectLists" multiple="true" size="3"></select>
+        </div>
+        <div>
+            <select data-bind="options:Countries,
+                                optionsText:'countryName',
+                                value:selectedCountry,
+                                optionsCaption:'Choose...'"></select>
+        </div>
+        <div data-bind="visible:selectedCountry">
+            <span data-bind="text:selectedCountry()?selectedCountry().countryPopulation:'unknown'"></span>
+        </div>
+        <div>
+                <select data-bind="options:Countries,
+                                    optionsText:function(item) {
+                                        return item.countryName + ' (pop: ' + item.countryPopulation + ')'
+                                    },
+                                    value:selectedCountry,
+                                    optionsCaption:'Choose...'"></select>
+        </div>
+        <div>
+            <select multiple data-bind="options:myItems,
+                                optionsText:'name',
+                                value:selectItem,
+                                optionsValue:'id',
+                                optionsCaption:'Choose...'"></select>
+        </div>
+        <div>
+            <select size="5" multiple="true" data-bind="options:multipleList,
+                    selectedOptions:chosenCountries"></select>
+        </div>
+        <div>
+                <select data-bind="options:myItems,
+                                optionsText:'name',
+                                value:selectItem,
+                                optionsValue:'id',
+                                optionsCaption:'Choose...'"></select>
+        </div>
+        <div>
+            <div data-bind="foreach:myList">
+                <div>
+                        <select data-bind="optionsCaption:'呵呵呵',
+                                            options: option,
+                                            value:checkoption,
+                                            optionsText: 'optionname', 
+                                            optionsValue: 'id'"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // $(function(){
+            var Country=function(id,name,population){
+                this.id=id;
+                this.countryName=name;
+                this.countryPopulation=population;
+            }
+            var vm={
+                personName:'Bob',
+                selectLists:ko.observableArray(['France','Germany','Spain']),
+                Countries:ko.observableArray([
+                    new Country(1,'UK',65000000),
+                    new Country(2,'USA',320000000),
+                    new Country(3,'Sweden',2900000)
+                ]),
+                selectedCountry:ko.observable(),
+                myItems:[
+                    {name:'Item 1',id:1,disable:ko.observable(false)},
+                    {name:'Item 3',id:3,disable:ko.observable(true)},
+                    {name:'Item 4',id:4,disable:ko.observable(false)}
+                ],
+                setOptionDisable:function(option,item){
+                    ko.applyBindingsToNode(option,{disable:item.disable},item);
+                },
+                selectItem:ko.observableArray(),
+                multipleList:ko.observableArray(['France', 'Germany', 'Spain']),
+                chosenCountries:ko.observableArray(['Germany']),
+                myList:ko.observableArray([
+                    {
+                        checkoption:ko.observableArray([]),
+                        name:'Item 1',
+                        id:1,
+                        option:[
+                            {id:11,optionname:'强烈不同意'},
+                            {id:12,optionname:'不同意'},
+                            {id:13,optionname:'基本不同意'},
+                            {id:14,optionname:'基本同意'},
+                            {id:15,optionname:'强烈同意'},
+                        ]
+                    },
+                    {
+                        checkoption:ko.observableArray([]),
+                        name:'Item 2',
+                        id:2,
+                        option:[
+                            {id:21,optionname:'强烈不同意'},
+                            {id:22,optionname:'不同意'},
+                            {id:23,optionname:'基本不同意'},
+                            {id:24,optionname:'基本同意'},
+                            {id:25,optionname:'强烈同意'},
+                        ]
+                    },
+                    {
+                        checkoption:ko.observableArray([]),
+                        name:'Item 3',
+                        id:3,
+                        option:[
+                            {id:31,optionname:'强烈不同意'},
+                            {id:32,optionname:'不同意'},
+                            {id:33,optionname:'基本不同意'},
+                            {id:34,optionname:'基本同意'},
+                            {id:35,optionname:'强烈同意'},
+                        ]
+                    },
+                ]),
+            };
+
+            ko.applyBindings(vm);
+            vm.selectLists.push('China');
+
+
+        // })
+    </script>
+</body>
+</html>
