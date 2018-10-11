@@ -92,7 +92,7 @@ textarea::-webkit-input-placeholder {
 	position: fixed;
     left: 0;
     top: 0;
-    z-index: 5;
+    z-index: 100;
     width: 100%;
     height: 30px;
 	background-color: #fff;
@@ -120,16 +120,18 @@ textarea::-webkit-input-placeholder {
 	height:18px;
 }
 
-.progress .progress-bar.progress-bar-success {
+.answer-header .progress .progress-bar.progress-bar-success {
     background: -webkit-linear-gradient(#AAEAFF, #71D1FF);
     background: -o-linear-gradient(#AAEAFF, #71D1FF);
     background: -moz-linear-gradient(#AAEAFF, #71D1FF);
-    background: linear-gradient(#AAEAFF, #71D1FF);
+	background: linear-gradient(#AAEAFF, #71D1FF);
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#AAEAFF',endColorStr='#71D1FF',gradientType='0'); 
 }
 
 /************************************问卷内容******************************************/
 .container .answer-container{
 	margin:0 auto;
+	margin-bottom:100px;
 	position: relative;
 	top:50px;
 	width: 1000px;
@@ -163,6 +165,39 @@ textarea::-webkit-input-placeholder {
 	background:cover;
 }
 
+.container .answer-container .bottom{
+	margin:0 auto;
+	position:relative;
+	width:220px;
+	padding:40px 0;
+}
+
+.container .answer-container .bottom .btn{
+	width:100px;
+	height:28px;
+	margin-bottom:20px;
+	line-height:28px;
+    border-radius: 4px;
+    border: solid 1px #6090df;
+	font-size: 12px;
+	cursor:pointer;
+	text-align:center;
+	color:#6090df;
+}
+
+.container .answer-container .bottom .previous{
+	float:left;
+}
+
+.container .answer-container .bottom .next{
+	float:right;
+}
+
+.container .answer-container .bottom .btn:hover{
+	color:#3175e4;
+	border-color:#3175e4;
+}
+
 /***********************问卷矩阵题**********************/
 .container .answer-container .list-container{
 	position:relative;
@@ -171,7 +206,10 @@ textarea::-webkit-input-placeholder {
 
 .list-container .matrix{
 	position: relative;
-	/* padding:30px 0; */
+	left:0;
+	border-bottom:1px solid #dcdce0;
+	-webkit-text-size-adjust: 100%;
+	-webkit-overflow-scrolling: touch;
 }
 
 .list-container .matrix:after {
@@ -186,6 +224,7 @@ textarea::-webkit-input-placeholder {
 	padding:20px 0;
 	color:#323232;
 	line-height:14px;
+	border-bottom:1px solid #dcdce0;
 }
 
 .list-container .matrix .problem span{
@@ -205,16 +244,13 @@ textarea::-webkit-input-placeholder {
 }
 
 table {
-	width: 100%;
 	max-width: 100%;
 	border-spacing: 0;
 	border-collapse: collapse;
 	background-color: transparent;
 }
 
-.table-bordered {
-	border: 1px solid #ddd;
-}
+.table-bordered {}
 
 .left_div {
 	width: 100px;
@@ -227,25 +263,28 @@ table {
 
 .left_div2 {
 	width: 100%;
-	height: 400px;
+	max-height: 250px;
 	overflow: hidden;
 }
 
 .left_table1 th {
-	background: #E9F8FF;
 	text-align: center;
-	padding: 8px;
+	height:40px;
 	line-height: 1.42857143;
-	vertical-align: top;
-	border: 1px solid #ddd;
+	vertical-align: middle;
+	color:323232;
+	font-size:12px;
+	font-weight:500;
 }
 
 .left_table2 th {
-	text-align: center;
-	padding: 8px;
+	text-align: left;
+	padding: 12px;
 	line-height: 1.42857143;
 	vertical-align: top;
-	border: 1px solid #ddd;
+	color:323232;
+	font-size:12px;
+	font-weight:500;
 }
 
 .right_div {
@@ -253,7 +292,7 @@ table {
 }
 
 .right_div1 {
-	width: 100%;
+	/* width: 100%; */
 	overflow: hidden;
 }
 
@@ -263,49 +302,57 @@ table {
 
 .right_div2 {
 	position: relative;
-	width: 100%;
-	height: 400px;
+	/* width: 100%; */
+	max-height: 250px;
 	overflow: hidden;
+	-webkit-text-size-adjust: 100%;
+	-webkit-overflow-scrolling: touch;
 }
 
 .right_table1 {
-	width: 880px;
+	table-layout:fixed;
+	/* width: 880px; */
 }
 
 .right_table2 {
 	/**width和max-width一起写，手机浏览器打开也能固定长度**/
-	width: 880px;
+	table-layout:fixed;
+	/* width: 880px; */
 	max-width: 880px;
 	white-space: nowrap;
 }
 
 .right_table1 th {
-	background: #E9F8FF;
-	text-align: center;
-	width: 10%;
+	width: 100px;
+	height:40px;
 	padding: 8px;
+	font-weight:500;
+	color:#323232;
+	text-align: left;
+	vertical-align: middle;
+	font-size:12px;
 	line-height: 1.42857143;
-	vertical-align: top;
-	border: 1px solid #ddd;
 }
 
 .right_table2 td {
-	width: 10%;
+	width: 100px;
 	text-align: center;
-	padding: 8px;
 	line-height: 1.42857143;
-	vertical-align: top;
-	border: 1px solid #ddd;
+	vertical-align: middle;
+	color:323232;
+	font-size:12px;
+	font-weight:500;
 }
 
 .right_table2 td select{
 	display:inline-block;
+	padding-left:6px;
 	width:72px;
-	height:21px;
+	height:28px;
 	font-size:12px;
 	color:#323232;
 	text-align: left;
-	line-height:21px;
+	line-height:28px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTZEaa/1AAAAwklEQVRIS8XQsQkCQRCF4YtMBAVjCzDR7cLSTK3AJkxMLMCu1nfHKsv4O3LJc+AL7j+GgR1qrX+F0QmjE0YnjE4YnTA6YXTC6ITRCWNmztB+hDFTyrH8sGz3cT/CmNGBq9QvHrJr93E/wpjRgYVc2sHeXQ7t9jS0H2HMjKNDKzm3w6Ob7Kef3dB+hDHzGh3cyKkdfz97P7QfYcz0o8Nr2bbPj6H9CGNmztB+hNEJoxNGJ4xOGJ0wOmF0wuiE0QmjTx2eBK6bMXIimFQAAAAASUVORK5CYII=),linear-gradient(to top, #dcdce0, #fff);
     background-repeat: no-repeat, no-repeat;
     background-position: 100% 0, 0px 0;
@@ -325,6 +372,7 @@ table {
     -khtml-user-select: none;
     user-select: none;
 }
+
 .right_table2 td select:hover {
 	border-color: #6090df;
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTZEaa/1AAAAwklEQVRIS8XQsQkCQRCF4YtMBAVjCzDR7cLSTK3AJkxMLMCu1nfHKsv4O3LJc+AL7j+GgR1qrX+F0QmjE0YnjE4YnTA6YXTC6ITRCWNmztB+hDFTyrH8sGz3cT/CmNGBq9QvHrJr93E/wpjRgYVc2sHeXQ7t9jS0H2HMjKNDKzm3w6Ob7Kef3dB+hDHzGh3cyKkdfz97P7QfYcz0o8Nr2bbPj6H9CGNmztB+hNEJoxNGJ4xOGJ0wOmF0wuiE0QmjTx2eBK6bMXIimFQAAAAASUVORK5CYII=),linear-gradient(to top, #f1f2f6, #fff);
