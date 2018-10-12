@@ -61,13 +61,13 @@ $(function () {
             oLeftTable.css("height", oHeight + 'px');
         }
 
-        //重置右侧table宽度一致
+        // //重置右侧table宽度一致
         // for (var i = 0; i < rightTable1.length; i++) {
         //     var oWidth = rightTable1.eq(i).width();
-        //     var oRightTable = rightTable1.eq(i).parents(".right_div").find(".right_table2");
+        //     var oRightTable = rightTable1.eq(i).parents(".right_div").find(".right_table1");
         //     oRightTable.css("width", oWidth + 'px');
         // }
-
+        
         //重置基本样式
         setResizeWidth();
     }())
@@ -82,7 +82,7 @@ $(function () {
         //动态设置其他样式
         var oBody = $("body").width();
         if (oBody <= 1000) {
-            $(".answer-container").css("width", "100%");
+            $(".answer-container").css("width", (oBody-40)+"px");
             $(".list-container").css("padding", "0");
 
             if (oBody <= 500) {
@@ -130,10 +130,13 @@ $(function () {
         //动态计算右侧容器宽度使浮动不错位
         var rightDiv = $(".right_div");
         var matrixWidth = $(".matrix").width();
-        var oRightTable1=$(".right_table1").width();
-
+        var oRightTable2=$(".right_table2");
         for (var i = 0; i < rightDiv.length; i++) {
-            rightDiv[i].style.width = (matrixWidth - 100) + "px";
+            if(oRightTable2.eq(i).width()<=(matrixWidth-68)){
+                rightDiv[i].style.width = (oRightTable2.eq(i).width()) + "px";
+            }else{
+                rightDiv[i].style.width = (matrixWidth-68) + "px";
+            }
         }
     }
 
