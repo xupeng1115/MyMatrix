@@ -20,24 +20,24 @@ $(function () {
                     leftTable2.eq(j).append("<tr class='left_tr'><th>我是首列</th></tr>");
                 }
 
-                // rightTable2.eq(j).append("<tr class='right_tr'>"+
-                //                         "<td>" + str + "</td>"+
-                //                         "<td>" + str + "</td>"+
-                //                         "<td>" + str +"</td>"+
-                //                         "<td>" + str +"</td>"+
-                //                         "<td>" + str + "</td>"+
-                //                         "<td>" + str + "</td>"+
-                //                         "<td>" + str +"</td>"+
-                //                         "<td>" + str +"</td>"+
-                //                         "<td>" + str + "</td>"+
-                //                         "<td>" + str + "</td>"+
-                //                         "</tr>");
                 rightTable2.eq(j).append("<tr class='right_tr'>"+
                                         "<td>" + str + "</td>"+
                                         "<td>" + str + "</td>"+
                                         "<td>" + str +"</td>"+
                                         "<td>" + str +"</td>"+
+                                        "<td>" + str + "</td>"+
+                                        "<td>" + str + "</td>"+
+                                        "<td>" + str +"</td>"+
+                                        "<td>" + str +"</td>"+
+                                        "<td>" + str + "</td>"+
+                                        "<td>" + str + "</td>"+
                                         "</tr>");
+                // rightTable2.eq(j).append("<tr class='right_tr'>"+
+                //                         "<td>" + str + "</td>"+
+                //                         "<td>" + str + "</td>"+
+                //                         "<td>" + str +"</td>"+
+                //                         "<td>" + str +"</td>"+
+                //                         "</tr>");
             }
         }
     }());
