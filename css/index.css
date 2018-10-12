@@ -2,16 +2,6 @@
 *{
     margin:0;
     padding:0;
-    box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    -webkit-box-sizing:border-box;
-}
-
-*:before,
-*:after {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 }
 
 html,body{
@@ -94,7 +84,7 @@ textarea::-webkit-input-placeholder {
     top: 0;
     z-index: 100;
     width: 100%;
-    height: 30px;
+    height: 18px;
 	background-color: #fff;
 }
 
@@ -253,7 +243,7 @@ table {
 .table-bordered {}
 
 .left_div {
-	width: 100px;
+	width: 58px;
 	float: left;
 }
 
@@ -279,7 +269,7 @@ table {
 
 .left_table2 th {
 	text-align: left;
-	padding: 12px;
+	padding: 12px 10px 12px 0;
 	line-height: 1.42857143;
 	vertical-align: top;
 	color:323232;
@@ -297,7 +287,7 @@ table {
 }
 
 .right_divx {
-	width: 900px;
+	/* width: 900px; */
 }
 
 .right_div2 {
@@ -318,14 +308,14 @@ table {
 	/**width和max-width一起写，手机浏览器打开也能固定长度**/
 	table-layout:fixed;
 	/* width: 880px; */
-	max-width: 880px;
+	max-width: 782px;
 	white-space: nowrap;
 }
 
 .right_table1 th {
-	width: 100px;
+	width: 80px;
 	height:40px;
-	padding: 8px;
+	padding: 10px;
 	font-weight:500;
 	color:#323232;
 	text-align: left;
@@ -346,13 +336,13 @@ table {
 
 .right_table2 td select{
 	display:inline-block;
+	width:80px;
 	padding-left:6px;
-	width:72px;
 	height:28px;
 	font-size:12px;
 	color:#323232;
-	text-align: left;
-	line-height:28px;
+	text-align:center;
+	vertical-align:middle;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTZEaa/1AAAAwklEQVRIS8XQsQkCQRCF4YtMBAVjCzDR7cLSTK3AJkxMLMCu1nfHKsv4O3LJc+AL7j+GgR1qrX+F0QmjE0YnjE4YnTA6YXTC6ITRCWNmztB+hDFTyrH8sGz3cT/CmNGBq9QvHrJr93E/wpjRgYVc2sHeXQ7t9jS0H2HMjKNDKzm3w6Ob7Kef3dB+hDHzGh3cyKkdfz97P7QfYcz0o8Nr2bbPj6H9CGNmztB+hNEJoxNGJ4xOGJ0wOmF0wuiE0QmjTx2eBK6bMXIimFQAAAAASUVORK5CYII=),linear-gradient(to top, #dcdce0, #fff);
     background-repeat: no-repeat, no-repeat;
     background-position: 100% 0, 0px 0;
