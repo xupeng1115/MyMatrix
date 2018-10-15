@@ -1,28 +1,28 @@
-console.log(PageList);
+// console.log(PageList);
 
 $(function () {
     //绑定数据
     var vm={
-        PageList:ko.observableArray(PageList)
+        PageList:ko.observableArray()
     };
     ko.applyBindings(vm);
     // console.log(vm.PageList());
 
     //对数据源添加监听属性
     (function(){
-        // for(var i=0;i<PageList.length;i++){
-        //     if(PageList[i].questiontype==0){
-        //         PageList[i].checkoption=ko.observableArray([]);
-        //     }else if(PageList[i].questiontype==1){
-        //         for(var j=0;j<PageList[i].answers.length;j++){
-        //             for(var m=0;m<PageList[i].answers[j].options.length;m++){
-        //                 PageList[i].answers[j].options[m].checkoption=ko.observableArray([]);
-        //             }
-        //         }
-        //     }
-        // }
-        // vm.PageList(PageList);
-        // console.log(vm.PageList());
+        for(var i=0;i<PageList.length;i++){
+            if(PageList[i].questiontype==0){
+                PageList[i].checkoption=ko.observableArray([]);
+            }else if(PageList[i].questiontype==1){
+                for(var j=0;j<PageList[i].answers.length;j++){
+                    for(var m=0;m<PageList[i].answers[j].options.length;m++){
+                        PageList[i].answers[j].options[m].checkoption=ko.observableArray([]);
+                    }
+                }
+            }
+        }
+        vm.PageList(PageList);
+        console.log(vm.PageList());
     }());
 
     //jquery初始化页面
@@ -193,5 +193,20 @@ $(function () {
     });
 
     
+    $("body").on("click",".btn",function(){
+        for(var i=0;i<PageList2.length;i++){
+            if(PageList2[i].questiontype==0){
+                PageList2[i].checkoption=ko.observableArray([]);
+            }else if(PageList2[i].questiontype==1){
+                for(var j=0;j<PageList2[i].answers.length;j++){
+                    for(var m=0;m<PageList2[i].answers[j].options.length;m++){
+                        PageList2[i].answers[j].options[m].checkoption=ko.observableArray([]);
+                    }
+                }
+            }
+        }
+        vm.PageList(PageList2);
+    })
+
 
 });
