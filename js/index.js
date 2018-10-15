@@ -1,45 +1,69 @@
+console.log(PageList);
 
 $(function () {
-    
-    //初始化页面
+    //绑定数据
+    var vm={
+        PageList:ko.observableArray(PageList)
+    };
+    ko.applyBindings(vm);
+    // console.log(vm.PageList());
+
+    //对数据源添加监听属性
+    (function(){
+        // for(var i=0;i<PageList.length;i++){
+        //     if(PageList[i].questiontype==0){
+        //         PageList[i].checkoption=ko.observableArray([]);
+        //     }else if(PageList[i].questiontype==1){
+        //         for(var j=0;j<PageList[i].answers.length;j++){
+        //             for(var m=0;m<PageList[i].answers[j].options.length;m++){
+        //                 PageList[i].answers[j].options[m].checkoption=ko.observableArray([]);
+        //             }
+        //         }
+        //     }
+        // }
+        // vm.PageList(PageList);
+        // console.log(vm.PageList());
+    }());
+
+    //jquery初始化页面
     (function(){
         //动态渲染列表内容
-        var leftTable2 = $(".left_table2");
-        var rightTable2 = $(".right_table2");
-        var str = "<select><option>请选择</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>";
-        // var str = 1;
-        var str2 = "我是首列我是首列我是首列我是首列我是首列";
-        var str3 = "我是首列我是首列我是首列我是首列我是首列我是首列我是首列我是首列我是首列我是首列";
-        for (var i = 0; i < 24; i++) {
-            for (var j = 0; j < leftTable2.length; j++) {
-                if (i === 3) {
-                    leftTable2.eq(j).append("<tr class='left_tr'><th>" + str2 + "</th></tr>");
-                } else if (i === 6) {
-                    leftTable2.eq(j).append("<tr class='left_tr'><th>" + str3 + "</th></tr>");
-                } else {
-                    leftTable2.eq(j).append("<tr class='left_tr'><th>我是首列</th></tr>");
-                }
+        // var leftTable2 = $(".left_table2");
+        // var rightTable2 = $(".right_table2");
+        // var str = "<select><option>请选择</option><option>在公司，创新的行为受到表彰和奖励</option><option>2</option><option>3</option><option>4</option><option>5</option></select>";
+        // // var str = 1;
+        // var str2 = "我是首列我是首列我是首列我是首列我是首列";
+        // var str3 = "我是首列我是首列我是首列我是首列我是首列我是首列我是首列我是首列我是首列我是首列";
+        // for (var i = 0; i < 24; i++) {
+        //     for (var j = 0; j < leftTable2.length; j++) {
+        //         if (i === 3) {
+        //             leftTable2.eq(j).append("<tr class='left_tr'><th>" + str2 + "</th></tr>");
+        //         } else if (i === 6) {
+        //             leftTable2.eq(j).append("<tr class='left_tr'><th>" + str3 + "</th></tr>");
+        //         } else {
+        //             leftTable2.eq(j).append("<tr class='left_tr'><th>我是首列</th></tr>");
+        //         }
 
-                rightTable2.eq(j).append("<tr class='right_tr'>"+
-                                        "<td>" + str + "</td>"+
-                                        "<td>" + str + "</td>"+
-                                        "<td>" + str +"</td>"+
-                                        "<td>" + str +"</td>"+
-                                        "<td>" + str + "</td>"+
-                                        "<td>" + str + "</td>"+
-                                        "<td>" + str +"</td>"+
-                                        "<td>" + str +"</td>"+
-                                        "<td>" + str + "</td>"+
-                                        "<td>" + str + "</td>"+
-                                        "</tr>");
-                // rightTable2.eq(j).append("<tr class='right_tr'>"+
-                //                         "<td>" + str + "</td>"+
-                //                         "<td>" + str + "</td>"+
-                //                         "<td>" + str +"</td>"+
-                //                         "<td>" + str +"</td>"+
-                //                         "</tr>");
-            }
-        }
+        //         rightTable2.eq(j).append("<tr class='right_tr'>"+
+        //                                 "<td>" + str + "</td>"+
+        //                                 "<td>" + str + "</td>"+
+        //                                 "<td>" + str +"</td>"+
+        //                                 "<td>" + str +"</td>"+
+        //                                 "<td>" + str + "</td>"+
+        //                                 "<td>" + str + "</td>"+
+        //                                 "<td>" + str +"</td>"+
+        //                                 "<td>" + str +"</td>"+
+        //                                 "<td>" + str + "</td>"+
+        //                                 "<td>" + str + "</td>"+
+        //                                 "</tr>");
+        //         // rightTable2.eq(j).append("<tr class='right_tr'>"+
+        //         //                         "<td>" + str + "</td>"+
+        //         //                         "<td>" + str + "</td>"+
+        //         //                         "<td>" + str +"</td>"+
+        //         //                         "<td>" + str +"</td>"+
+        //         //                         "</tr>");
+        //     }
+        // }
     }());
     
     //初始化列表后重置列表样式
@@ -70,7 +94,7 @@ $(function () {
         
         //重置基本样式
         setResizeWidth();
-    }())
+    }());
 
     //监听窗口变化
     window.onresize = function () {
@@ -158,7 +182,7 @@ $(function () {
     //子元素滚动时禁止父元素滚动
     $(".right_div2").on("touchmove", function (e) {
         e.preventDefault();
-    })
+    });
 
     //监听元素滚动时同步滚动其他元素
     $(".right_div2").on("scroll", function (e) {
@@ -166,6 +190,8 @@ $(function () {
         var right_div2_left = $(this)[0].scrollLeft;
         $(this).parent().siblings(".left_div").find(".left_div2")[0].scrollTop = right_div2_top;
         $(this).parent().find(".right_div1")[0].scrollLeft = right_div2_left;
-    })
+    });
+
+    
 
 });

@@ -13,8 +13,7 @@
     <script src="js/jquery.nicescroll.js"></script>
 
     <link rel="stylesheet" href="css/index.css?v=20181012">
-    <script src="js/index.js"></script>
-
+    
 </head>
 
 <body>
@@ -30,9 +29,27 @@
                 <div class="title">MrZhang1</div>
                 <div class="logo"></div>
             </div>
-            <div class="list-container">
-                <div class="matrix">
-                    <div class="problem"><span class="name">Q3.XXXXXX请选择你的喜爱程度</span><span class="type">量表单选题</span></div>
+            
+            <!--题目列表-->
+            <div class="list-container" data-bind="foreach:PageList">
+
+                <!--单选题-->
+                <!-- ko if: questiontype ==0 -->
+                <div class="single" data-bind="attr:{id:id,type:questiontype}">
+                    <div class="question"><span class="name" data-bind="text:questionname"><!--Q1.XXXXXX请选择你的喜爱程度--></span><span class="type">量表单选题</span></div>
+                    <div class="option-list" data-bind="foreach:option">
+                        <div class="option-item">
+                            <input type="radio" data-bind="value:id,checked:id,attr:{id:id}" name="radio">
+                            <label data-bind="text:optionname,attr:{for:id}"></label>
+                        </div>
+                    </div>
+                </div>
+                <!--/ko-->
+
+                <!--矩阵题-->
+                <!-- ko if: questiontype ==1 -->
+                <div class="matrix" data-bind="attr:{id:id,type:questiontype}">
+                    <div class="question"><span class="name" data-bind="text:questionname"><!--Q3.XXXXXX请选择你的喜爱程度--></span><span class="type">量表矩阵题</span></div>
                     <div class="left_div">
                         <div class="left_div1">
                             <table class="left_table1">
@@ -42,34 +59,41 @@
                             </table>
                         </div>
                         <div class="left_div2">
-                            <table class="left_table2"></table>
+                            <!-- 绑定部门名称列 -->
+                            <table class="left_table2" data-bind="foreach:departments">
+                                <tr class='left_tr'><th data-bind="text:departmentname"><!--人工智能部--></th></tr>
+                            </table>
                         </div>
                     </div>
                     <div class="right_div">
                         <div class="right_div1">
                             <table class="right_table1">
-                                <tr>
-                                    <th>我是表1</th>
-                                    <th>我是表头我是表头我是表头我是表头我是表头</th>
-                                    <th>我是表3</th>
-                                    <th>我是表4</th>
-                                    <th>我是表5</th>
-                                    <th>我是表6</th>
-                                    <th>我是表7</th>
-                                    <th>我是表8</th>
-                                    <th>我是表9</th>
-                                    <th>我是表10</th>
+                                <!-- 绑定问题标题行 -->
+                                <tr data-bind="foreach:questions">
+                                    <th data-bind="text:questionname"><!--我很少考虑去其他公司工作--></th>
                                 </tr>
                             </table>
                         </div>
                         <div class="right_div2">
-                            <table class="right_table2"></table>
+                            <!-- 绑定答案矩阵 -->
+                            <table class="right_table2" data-bind="foreach:answers">
+                                <tr class='right_tr' data-bind="foreach:options">
+                                    <td>
+                                        <select data-bind="optionsCaption:'请选择',
+                                                            options: option,
+                                                            value:'id',
+                                                            optionsText: 'optionname', 
+                                                            optionsValue: 'id'"></select>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
+                <!--/ko-->
 
-                <div class="matrix">
-                        <div class="problem"><span class="name">Q3.XXXXXX请选择你的喜爱程度</span><span class="type">量表单选题</span></div>
+                <!-- <div class="matrix">
+                        <div class="question"><span class="name">Q3.XXXXXX请选择你的喜爱程度</span><span class="type">量表单选题</span></div>
                     <div class="left_div">
                         <div class="left_div1">
                             <table class="left_table1">
@@ -104,6 +128,7 @@
                         </div>
                     </div>
                 </div>
+            </div> -->
             </div>
             <div class="bottom clearbox">
                 <div class="previous btn">上一页</div>
@@ -111,6 +136,10 @@
             </div>
         </div>
     </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/index.js"></script>
+    
 </body>
 
 </html>

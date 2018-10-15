@@ -208,8 +208,8 @@ textarea::-webkit-input-placeholder {
 	content: "";
 	clear: both;
 }
-
-.list-container .matrix .problem{
+.list-container .matrix .question,
+.list-container .single .question{
 	width:100%;
 	font-size:12px;
 	padding:20px 0;
@@ -218,15 +218,18 @@ textarea::-webkit-input-placeholder {
 	border-bottom:1px solid #dcdce0;
 }
 
-.list-container .matrix .problem span{
+.list-container .matrix .question span,
+.list-container .single .question span{
 	display:inline-block;
 }
 
-.list-container .matrix .problem span.name{
+.list-container .matrix .question span.name,
+.list-container .single .question span.name{
 	margin-right:10px;
 }
 
-.list-container .matrix .problem span.type{
+.list-container .matrix .question span.type,
+.list-container .single .question span.type{
 	font-size:12px;
 	color:#fff;
 	padding:2px 6px;
@@ -329,7 +332,7 @@ table {
 }
 
 .right_table2 td select{
-	display:inline-block;
+	display:block;
 	width:80px;
 	padding-left:6px;
 	height:28px;
@@ -353,7 +356,7 @@ table {
     -webkit-user-select: none;
     -ms-user-select: none;
     -khtml-user-select: none;
-    user-select: none;
+	user-select: none;
 }
 
 .right_table2 td select:hover {
