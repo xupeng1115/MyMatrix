@@ -13,7 +13,7 @@
     <script src="js/jquery.nicescroll.js"></script>
 
     <link rel="stylesheet" href="css/matrix.css?v=20181012">
-    
+
 </head>
 
 <body>
@@ -29,7 +29,7 @@
                 <div class="title">MrZhang1</div>
                 <div class="logo"></div>
             </div>
-            
+
             <div class="list-container" data-bind="foreach:PageList">
 
                 <!-- ko if:questiontype==0 -->
@@ -56,30 +56,38 @@
                             </table>
                         </div>
                         <div class="left_div2">
-                            <table class="left_table2" data-bind="foreach:departments">
-                                <tr class='left_tr'><th data-bind="text:departmentname"></th></tr>
+                            <table class="left_table2">
+                                <tbody data-bind="foreach:departments">
+                                    <tr class='left_tr'>
+                                        <th data-bind="text:departmentname"></th>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="right_div">
                         <div class="right_div1">
                             <table class="right_table1">
-                                <tr data-bind="foreach:questions">
-                                    <th data-bind="text:questionname"></th>
-                                </tr>
+                                <tbody>
+                                    <tr data-bind="foreach:questions">
+                                        <th data-bind="text:questionname"></th>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                         <div class="right_div2">
-                            <table class="right_table2" data-bind="foreach:answers">
-                                <tr class='right_tr' data-bind="foreach:options">
-                                    <td>
-                                        <select data-bind="optionsCaption:'请选择',
-                                                            options: option,
-                                                            value:checkoption,
-                                                            optionsText: 'optionname', 
-                                                            optionsValue: 'id'"></select>
-                                    </td>
-                                </tr>
+                            <table class="right_table2">
+                                <tbody data-bind="foreach:answers">
+                                    <tr class='right_tr' data-bind="foreach:options">
+                                        <td>
+                                            <select data-bind="optionsCaption:'请选择',
+                                                                options: option,
+                                                                value:checkoption,
+                                                                optionsText: 'optionname', 
+                                                                optionsValue: 'id'"></select>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -95,8 +103,9 @@
     </div>
 
     <script src="js/data.js"></script>
+    <script src="js/matrix.js"></script>
     <script src="js/index.js"></script>
-    
+
 </body>
 
 </html>
