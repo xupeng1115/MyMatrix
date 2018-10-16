@@ -1,46 +1,45 @@
 //矩阵对象
 var Matrix={
-    Init:function(arr,vm){              //初始化绑定矩阵渲染数据
+    Init:function(arr,vm){                  //初始化绑定矩阵渲染数据
         var  _self=this;
         _self.BindingData(arr,vm);
         _self.InitStyle();
         _self.SetScroll($(".right_div2"));
         _self.WindowResize();
     },
-    InitStyle:function(){               //初始化重置矩阵样式
+    InitStyle:function(){                   //初始化重置矩阵样式
         var _self=this;
         _self.SetTableLine1();
         _self.SetTableLine2();
         _self.SetResizeWidth();
     },
-    SetResizeWidth:function(){           //窗口变化时重置基本样式
+    SetResizeWidth:function(){              //窗口变化时重置基本样式
         var _self=this;
         _self.SetOtherStyle();
         _self.SetRightTable();
     },
-    ResizeList:function(arr,vm){        //数据源变化时重新渲染矩阵
+    ResizeList:function(arr,vm){            //数据源变化时重新渲染矩阵
         var  _self=this;
         _self.Init(arr,vm);
     },
-    BindingData:function(arr,vm){
+    BindingData:function(arr,vm){           //数据绑定
         var _self=this;
         var data=_self.ProcessPageData(arr);
         vm.PageList([]);
         vm.PageList(data);
     },
-    ProcessPageData:function(arr){
+    ProcessPageData:function(arr){          //处理一页矩阵数据
         var _self=this;
         for(var i=0;i<arr.length;i++){
             if(arr[i].questiontype==0){
                 arr[i].checkoption=ko.observableArray([]);
             }else if(arr[i].questiontype==5){
-                console.log(arr[i].selectoption);
                 _self.ProcessMatrixData(arr[i])
             }
         }
         return arr;
     },
-    ProcessMatrixData:function(arr){
+    ProcessMatrixData:function(arr){        //处理一条矩阵数据
         for(var i=0;i<arr.selectoption.length;i++){
             for(var j=0;j<arr.selectoption[i].option.length;j++){
                 arr.selectoption[i].option[j].checkoption=ko.observableArray([]);
