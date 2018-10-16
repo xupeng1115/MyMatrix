@@ -3,22 +3,22 @@ var Matrix={
     Init:function(arr,vm){              //初始化绑定矩阵渲染数据
         var  _self=this;
         _self.BindingData(arr,vm);
-        _self.initStyle();
-        _self.setScroll($(".right_div2"));
-        _self.windowResize();
+        _self.InitStyle();
+        _self.SetScroll($(".right_div2"));
+        _self.WindowResize();
     },
-    initStyle:function(){               //初始化重置矩阵样式
+    InitStyle:function(){               //初始化重置矩阵样式
         var _self=this;
-        _self.setTableLine1();
-        _self.setTableLine2();
-        _self.setResizeWidth();
+        _self.SetTableLine1();
+        _self.SetTableLine2();
+        _self.SetResizeWidth();
     },
-    setResizeWidth:function(){           //窗口变化时重置基本样式
+    SetResizeWidth:function(){           //窗口变化时重置基本样式
         var _self=this;
-        _self.setOtherStyle();
-        _self.setRightTable();
+        _self.SetOtherStyle();
+        _self.SetRightTable();
     },
-    resizeList:function(arr,vm){        //数据源变化时重新渲染矩阵
+    ResizeList:function(arr,vm){        //数据源变化时重新渲染矩阵
         var  _self=this;
         _self.Init(arr,vm);
     },
@@ -37,7 +37,7 @@ var Matrix={
         vm.PageList([]);
         vm.PageList(arr);
     },
-    setTableLine1:function(){               //重置第一行所有table高度一致
+    SetTableLine1:function(){               //重置第一行所有table高度一致
         var rightTable1 = $(".right_table1");
         for (var i = 0; i < rightTable1.length; i++) {
             var oHeight = rightTable1.eq(i).height();
@@ -45,7 +45,7 @@ var Matrix={
             oLeftTable.css("height", oHeight + 'px');
         }
     },
-    setTableLine2:function(){               //重置第二行table使所有tr高度一致
+    SetTableLine2:function(){               //重置第二行table使所有tr高度一致
         var rightTr = $(".right_tr");
         var leftTr = $(".left_tr");
         for (var i = 0; i < leftTr.length; i++) {
@@ -53,13 +53,13 @@ var Matrix={
             rightTr.eq(i).css("height", oHeight + 'px');
         }
     },
-    windowResize:function(){                //监听窗口变化调整滚动条位置
+    WindowResize:function(){                //监听窗口变化调整滚动条位置
         var _self=this;
         window.onresize = function () {
-            _self.setResizeWidth();
+            _self.SetResizeWidth();
         }
     },
-    setOtherStyle:function(){               //动态设置其他样式
+    SetOtherStyle:function(){               //动态设置其他样式
         var oBody = $("body").width();
         if (oBody <= 1000) {
             $(".answer-container").css("width", (oBody-40)+"px");
@@ -107,7 +107,7 @@ var Matrix={
             $(".list-container").css("padding", "0 80px");
         }
     },
-    setRightTable:function(){                   //动态计算右侧容器宽度使浮动不错位
+    SetRightTable:function(){                   //动态计算右侧容器宽度使浮动不错位
         var rightDiv = $(".right_div");
         var matrixWidth = $(".matrix").width();
         var oRightTable2=$(".right_table2");
@@ -119,7 +119,7 @@ var Matrix={
             }
         }
     },
-    registerScroll:function(el){                //注册滚动事件使同维table一起滚动
+    RegisterScroll:function(el){                //注册滚动事件使同维table一起滚动
         el.on("scroll",function (e) {
             var right_div2_top = $(this)[0].scrollTop;
             var right_div2_left = $(this)[0].scrollLeft;
@@ -132,7 +132,7 @@ var Matrix={
             e.preventDefault();
         });
     },
-    setScroll:function(el){                     //动态设置元素自定义滚动条
+    SetScroll:function(el){                     //动态设置元素自定义滚动条
         var _self=this;
         //首先删除所有已有的滚动条
         $(".nicescroll-rails").remove();
@@ -158,7 +158,7 @@ var Matrix={
         el.getNiceScroll().resize();
 
         //注册矩阵滚动事件,使同维table跟随滚动
-        _self.registerScroll(el);
+        _self.RegisterScroll(el);
 
     }
 }

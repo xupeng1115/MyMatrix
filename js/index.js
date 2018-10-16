@@ -6,7 +6,6 @@ $(function () {
     };
     ko.applyBindings(vm);
 
-
     $("body").on("click",".next",function(){
         Matrix.resizeList(PageList,vm);
     })
