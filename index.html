@@ -44,22 +44,24 @@
                 </div>
                 <!--/ko-->
 
-                <!-- ko if:questiontype==1 -->
+                <!-- ko if:questiontype==5 -->
                 <div class="matrix" data-bind="attr:{id:id,type:questiontype}">
                     <div class="question"><span class="name" data-bind="text:questionname"></span><span class="type">量表矩阵题</span></div>
                     <div class="left_div">
                         <div class="left_div1">
                             <table class="left_table1">
-                                <tr>
-                                    <th></th>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <th></th>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                         <div class="left_div2">
                             <table class="left_table2">
-                                <tbody data-bind="foreach:departments">
+                                <tbody data-bind="foreach:leftdepartoption">
                                     <tr class='left_tr'>
-                                        <th data-bind="text:departmentname"></th>
+                                        <th data-bind="text:questionname,attr:{questionid:questionid}"></th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -69,22 +71,22 @@
                         <div class="right_div1">
                             <table class="right_table1">
                                 <tbody>
-                                    <tr data-bind="foreach:questions">
-                                        <th data-bind="text:questionname"></th>
+                                    <tr data-bind="foreach:topdepartoption">
+                                        <th data-bind="text:questionname,attr:{questionid:questionid}"></th>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="right_div2">
                             <table class="right_table2">
-                                <tbody data-bind="foreach:answers">
-                                    <tr class='right_tr' data-bind="foreach:options">
-                                        <td>
+                                <tbody data-bind="foreach:selectoption">
+                                    <tr class='right_tr' data-bind="foreach:option">
+                                        <td data-bind="attr:{leftdepartmentid:$parent.leftdepartmentid,topdepartmentid:topdepartmentid}">
                                             <select data-bind="optionsCaption:'请选择',
                                                                 options: option,
                                                                 value:checkoption,
                                                                 optionsText: 'optionname', 
-                                                                optionsValue: 'id'"></select>
+                                                                optionsValue: 'optionid'"></select>
                                         </td>
                                     </tr>
                                 </tbody>

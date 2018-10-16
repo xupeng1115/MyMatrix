@@ -23,19 +23,31 @@ var Matrix={
         _self.Init(arr,vm);
     },
     BindingData:function(arr,vm){
+        var _self=this;
+        var data=_self.ProcessPageData(arr);
+        vm.PageList([]);
+        vm.PageList(data);
+    },
+    ProcessPageData:function(arr){
+        var _self=this;
         for(var i=0;i<arr.length;i++){
             if(arr[i].questiontype==0){
                 arr[i].checkoption=ko.observableArray([]);
-            }else if(arr[i].questiontype==1){
-                for(var j=0;j<arr[i].answers.length;j++){
-                    for(var m=0;m<arr[i].answers[j].options.length;m++){
-                        arr[i].answers[j].options[m].checkoption=ko.observableArray([]);
-                    }
-                }
+            }else if(arr[i].questiontype==5){
+                console.log(arr[i].selectoption);
+                _self.ProcessMatrixData(arr[i])
             }
         }
-        vm.PageList([]);
-        vm.PageList(arr);
+        return arr;
+    },
+    ProcessMatrixData:function(arr){
+        for(var i=0;i<arr.selectoption.length;i++){
+            for(var j=0;j<arr.selectoption[i].option.length;j++){
+                arr.selectoption[i].option[j].checkoption=ko.observableArray([]);
+            }
+        }
+        
+        return arr;
     },
     SetTableLine1:function(){               //重置第一行所有table高度一致
         var rightTable1 = $(".right_table1");
