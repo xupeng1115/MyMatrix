@@ -7,11 +7,11 @@ $(function () {
     ko.applyBindings(vm);
 
     $("body").on("click",".next",function(){
-        Matrix.resizeList(PageList,vm);
+        Matrix.ResizeList(PageList,vm);
     })
 
     $("body").on("click",".previous",function(){
-        Matrix.resizeList(PageList2,vm);
+        Matrix.ResizeList(PageList2,vm);
     })
 
     //页面初始化渲染
