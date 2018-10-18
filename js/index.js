@@ -7,13 +7,13 @@ $(function () {
     ko.applyBindings(vm);
 
     $("body").on("click",".next",function(){
-        Matrix.ResizeList(PageList,vm);
-    })
-
-    $("body").on("click",".previous",function(){
         Matrix.ResizeList(PageList2,vm);
     })
 
+    $("body").on("click",".previous",function(){
+        Matrix.ResizeList(PageList,vm);
+    })
+
     //页面初始化渲染
-    Matrix.Init(PageList,vm);
+    Matrix.Init(PageList2,vm);
 });

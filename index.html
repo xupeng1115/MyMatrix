@@ -47,8 +47,8 @@
                 <!-- ko if:questiontype==5 -->
                 <div class="matrix" data-bind="attr:{id:id,type:questiontype}">
                     <div class="question"><span class="name" data-bind="text:questionname"></span><span class="type">量表矩阵题</span></div>
-                    <div class="left_div">
-                        <div class="left_div1">
+                    <div class="left_div" data-bind="visible:selectoption.length>0">
+                        <div class="left_div1" data-bind="visible:leftdepartoption.length>0&&topdepartoption.length>0">
                             <table class="left_table1">
                                 <tbody>
                                     <tr>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="left_div2">
                             <table class="left_table2">
-                                <tbody data-bind="foreach:leftdepartoption">
+                                <tbody data-bind="foreach:leftdepartoption,visible:leftdepartoption.length>0">
                                     <tr class='left_tr'>
                                         <th data-bind="text:questionname,attr:{questionid:questionid}"></th>
                                     </tr>
@@ -67,10 +67,10 @@
                             </table>
                         </div>
                     </div>
-                    <div class="right_div">
+                    <div class="right_div" data-bind="css:{'right_width':leftdepartoption.length===0},visible:selectoption.length>0">
                         <div class="right_div1">
                             <table class="right_table1">
-                                <tbody>
+                                <tbody data-bind="visible:topdepartoption.length>0">
                                     <tr data-bind="foreach:topdepartoption">
                                         <th data-bind="text:questionname,attr:{questionid:questionid}"></th>
                                     </tr>

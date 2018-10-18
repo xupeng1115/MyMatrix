@@ -40,9 +40,11 @@ var Matrix={
         return arr;
     },
     ProcessMatrixData:function(arr){        //处理一条矩阵数据
-        for(var i=0;i<arr.selectoption.length;i++){
-            for(var j=0;j<arr.selectoption[i].option.length;j++){
-                arr.selectoption[i].option[j].checkoption=ko.observableArray([]);
+        if(arr.selectoption!==undefined){
+            for(var i=0;i<arr.selectoption.length;i++){
+                for(var j=0;j<arr.selectoption[i].option.length;j++){
+                    arr.selectoption[i].option[j].checkoption=ko.observableArray([]);
+                }
             }
         }
         
@@ -56,12 +58,18 @@ var Matrix={
             oLeftTable.css("height", oHeight + 'px');
         }
     },
-    SetTableLine2:function(){               //重置第二行table使所有tr高度一致
-        var rightTr = $(".right_tr");
-        var leftTr = $(".left_tr");
-        for (var i = 0; i < leftTr.length; i++) {
-            var oHeight = leftTr.eq(i).height();
-            rightTr.eq(i).css("height", oHeight + 'px');
+    SetTableLine2:function(){               //重置第二行table使所有tr高度一致(与业务相关，有三种情况：多行多列，单行多列，单列多行)
+        var rightTable2=$(".right_table2");
+        for (var i = 0; i < rightTable2.length; i++) {
+            if(rightTable2.eq(i).parents(".right_div").siblings(".left_div").find(".left_table2").find(".left_tr").length>0){
+                
+                var oRightTr=rightTable2.eq(i).find(".right_tr");
+                var oLeftTr=rightTable2.eq(i).parents(".right_div").siblings(".left_div").find(".left_table2").find(".left_tr");
+                for(var j=0;j<oLeftTr.length;j++){
+                    var oHeight = oLeftTr.eq(j).height();
+                    oRightTr.eq(j).css("height", oHeight + 'px');
+                }
+            }
         }
     },
     WindowResize:function(){                //监听窗口变化调整滚动条位置
@@ -124,9 +132,16 @@ var Matrix={
         var oRightTable2=$(".right_table2");
         for (var i = 0; i < rightDiv.length; i++) {
             if(oRightTable2.eq(i).width()<=(matrixWidth-68)){
+                console.log(rightDiv[i]);
                 rightDiv[i].style.width = (oRightTable2.eq(i).width()) + "px";
+                
             }else{
-                rightDiv[i].style.width = (matrixWidth-68) + "px";
+                if(rightDiv.eq(i).hasClass('right_width')){
+                    rightDiv[i].style.width = matrixWidth + "px";
+                }else{
+                    rightDiv[i].style.width = (matrixWidth-68) + "px";
+                }
+                
             }
         }
     },

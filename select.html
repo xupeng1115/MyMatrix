@@ -66,11 +66,14 @@
                 <div>
                         <select data-bind="optionsCaption:'呵呵呵',
                                             options: option,
-                                            value:checkoption,
+                                            value:check,
                                             optionsText: 'optionname', 
                                             optionsValue: 'id'"></select>
                 </div>
             </div>
+        </div>
+        <div>
+            <div>上的发生大放送的</div>
         </div>
     </div>
     <script>
@@ -102,7 +105,7 @@
                 chosenCountries:ko.observableArray(['Germany']),
                 myList:ko.observableArray([
                     {
-                        checkoption:ko.observableArray([]),
+                        check:ko.observableArray([]),
                         name:'Item 1',
                         id:1,
                         option:[
@@ -114,7 +117,7 @@
                         ]
                     },
                     {
-                        checkoption:ko.observableArray([]),
+                        check:ko.observableArray([]),
                         name:'Item 2',
                         id:2,
                         option:[
@@ -126,7 +129,7 @@
                         ]
                     },
                     {
-                        checkoption:ko.observableArray([]),
+                        check:ko.observableArray([]),
                         name:'Item 3',
                         id:3,
                         option:[
