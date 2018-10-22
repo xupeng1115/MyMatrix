@@ -250,6 +250,28 @@ var data = {
     id: 200,
     questionname: '在公司，创新的行为受到表彰和奖励满意吗。',
     questiontype: 5,
+    option:[
+        {
+            optionid: 1,
+            optionname: '强烈不同意'
+        },
+        {
+            optionid: 2,
+            optionname: '不同意'
+        },
+        {
+            optionid: 3,
+            optionname: '基本不同意'
+        },
+        {
+            optionid: 4,
+            optionname: '基本同意'
+        },
+        {
+            optionid: 5,
+            optionname: '强烈同意'
+        }
+    ],
     leftdepartoption: [{
             questionid: 1,
             questionname: "SLDKFJSJFSLDKFJSKDJFSLKDFJ34234234234234234"
@@ -584,6 +606,28 @@ var data1 = {
     id: 100,
     questionname: '在公司，创新的行为受到表彰和奖励满意吗。',
     questiontype: 5,
+    option:[
+        {
+            optionid: 1,
+            optionname: '强烈不同意'
+        },
+        {
+            optionid: 2,
+            optionname: '不同意'
+        },
+        {
+            optionid: 3,
+            optionname: '基本不同意'
+        },
+        {
+            optionid: 4,
+            optionname: '基本同意'
+        },
+        {
+            optionid: 5,
+            optionname: '强烈同意'
+        }
+    ],
     leftdepartoption: [{
             questionid: 1,
             questionname: "SLDKFJSJFSLDKFJSKDJFSLKDFJ34234234234234234"
@@ -2654,6 +2698,28 @@ var PageList = [{
         id: 2,
         questionname: '在公司，创新的行为受到表彰和奖励。',
         questiontype: 5,
+        option:[
+            {
+                optionid: 1,
+                optionname: '强烈不同意'
+            },
+            {
+                optionid: 2,
+                optionname: '不同意'
+            },
+            {
+                optionid: 3,
+                optionname: '基本不同意'
+            },
+            {
+                optionid: 4,
+                optionname: '基本同意'
+            },
+            {
+                optionid: 5,
+                optionname: '强烈同意'
+            }
+        ],
         leftdepartoption: [{
                 questionid: 1,
                 questionname: "SLDKFJSJFSLDKFJSKDJFSLKDFJ34234234234234234"
@@ -4750,6 +4816,28 @@ var PageList1 = [{
         id: 3,
         questionname: '在公司，创新的行为受到表彰和奖励。',
         questiontype: 5,
+        option:[
+            {
+                optionid: 1,
+                optionname: '强烈不同意'
+            },
+            {
+                optionid: 2,
+                optionname: '不同意'
+            },
+            {
+                optionid: 3,
+                optionname: '基本不同意'
+            },
+            {
+                optionid: 4,
+                optionname: '基本同意'
+            },
+            {
+                optionid: 5,
+                optionname: '强烈同意'
+            }
+        ],
         leftdepartoption: [{
                 questionid: 1,
                 questionname: "SLDKFJSJFSLDKFJSKDJFSLKDFJ34234234234234234"
@@ -6792,6 +6880,28 @@ var PageList1 = [{
         id: 4,
         questionname: '在公司，创新的行为受到表彰和奖励。',
         questiontype: 5,
+        option:[
+            {
+                optionid: 1,
+                optionname: '强烈不同意'
+            },
+            {
+                optionid: 2,
+                optionname: '不同意'
+            },
+            {
+                optionid: 3,
+                optionname: '基本不同意'
+            },
+            {
+                optionid: 4,
+                optionname: '基本同意'
+            },
+            {
+                optionid: 5,
+                optionname: '强烈同意'
+            }
+        ],
         leftdepartoption: [{
                 questionid: 1,
                 questionname: "游戏开发部"
@@ -7618,6 +7728,28 @@ var PageList2 = [{
         id: 2,
         questionname: '在公司，创新的行为受到表彰和奖励。',
         questiontype: 5,
+        option:[
+            {
+                optionid: 1,
+                optionname: '强烈不同意'
+            },
+            {
+                optionid: 2,
+                optionname: '不同意'
+            },
+            {
+                optionid: 3,
+                optionname: '基本不同意'
+            },
+            {
+                optionid: 4,
+                optionname: '基本同意'
+            },
+            {
+                optionid: 5,
+                optionname: '强烈同意'
+            }
+        ],
         leftdepartoption: [{
                 questionid: 1,
                 questionname: "游戏开发部"
@@ -8415,6 +8547,28 @@ var PageList2 = [{
         id: 3,
         questionname: '在公司，创新的行为受到表彰和奖励。',
         questiontype: 5,
+        option:[
+            {
+                optionid: 1,
+                optionname: '强烈不同意'
+            },
+            {
+                optionid: 2,
+                optionname: '不同意'
+            },
+            {
+                optionid: 3,
+                optionname: '基本不同意'
+            },
+            {
+                optionid: 4,
+                optionname: '基本同意'
+            },
+            {
+                optionid: 5,
+                optionname: '强烈同意'
+            }
+        ],
         leftdepartoption: [{
                 questionid: 1,
                 questionname: "游戏开发部"
@@ -9213,6 +9367,28 @@ var PageList2 = [{
         id: 4,
         questionname: '在公司，创新的行为受到表彰和奖励。',
         questiontype: 5,
+        option:[
+            {
+                optionid: 1,
+                optionname: '强烈不同意'
+            },
+            {
+                optionid: 2,
+                optionname: '不同意'
+            },
+            {
+                optionid: 3,
+                optionname: '基本不同意'
+            },
+            {
+                optionid: 4,
+                optionname: '基本同意'
+            },
+            {
+                optionid: 5,
+                optionname: '强烈同意'
+            }
+        ],
         leftdepartoption: [
             // {
             //     questionid:1,
@@ -10011,6 +10187,28 @@ var PageList2 = [{
         id: 3,
         questionname: '在公司，创新的行为受到表彰和奖励。',
         questiontype: 5,
+        option:[
+            {
+                optionid: 1,
+                optionname: '强烈不同意'
+            },
+            {
+                optionid: 2,
+                optionname: '不同意'
+            },
+            {
+                optionid: 3,
+                optionname: '基本不同意'
+            },
+            {
+                optionid: 4,
+                optionname: '基本同意'
+            },
+            {
+                optionid: 5,
+                optionname: '强烈同意'
+            }
+        ],
         leftdepartoption: [{
                 questionid: 1,
                 questionname: "游戏开发部"
