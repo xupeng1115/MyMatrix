@@ -136,7 +136,6 @@ var Matrix={
         var oRightTable2=$(".right_table2");
         for (var i = 0; i < rightDiv.length; i++) {
             if(oRightTable2.eq(i).width()<=(matrixWidth-68)){
-                console.log(rightDiv[i]);
                 rightDiv[i].style.width = (oRightTable2.eq(i).width()) + "px";
                 
             }else{

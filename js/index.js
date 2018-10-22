@@ -17,5 +17,8 @@ $(function () {
     })
 
     //页面初始化渲染
-    Matrix.Init(PageList,vm);
+    Matrix.Init(data1,vm);
 });
+
+
+

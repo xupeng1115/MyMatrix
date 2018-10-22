@@ -48,7 +48,7 @@
                 <div class="matrix" data-bind="attr:{id:id,type:questiontype}">
                     <div class="question"><span class="name" data-bind="text:questionname"></span><span class="type">量表矩阵题</span></div>
                     <div class="left_div" data-bind="visible:selectoption.length>0">
-                        <div class="left_div1" data-bind="visible:leftdepartoption.length>0&&topdepartoption.length>0">
+                        <div class="left_div1" data-bind="visible:selectcheckbox.length>0&&topdepartoption.length>0">
                             <table class="left_table1">
                                 <tbody>
                                     <tr>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="left_div2">
                             <table class="left_table2">
-                                <tbody data-bind="foreach:leftdepartoption,visible:leftdepartoption.length>0">
+                                <tbody data-bind="foreach:selectcheckbox,visible:selectcheckbox.length>0">
                                     <tr class='left_tr'>
                                         <th data-bind="text:questionname,attr:{questionid:questionid}"></th>
                                     </tr>
@@ -67,7 +67,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="right_div" data-bind="css:{'right_width':leftdepartoption.length===0},visible:selectoption.length>0">
+                    <div class="right_div" data-bind="css:{'right_width':selectcheckbox.length===0},visible:selectoption.length>0">
                         <div class="right_div1">
                             <table class="right_table1">
                                 <tbody data-bind="visible:topdepartoption.length>0">
