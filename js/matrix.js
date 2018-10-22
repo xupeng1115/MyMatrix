@@ -32,7 +32,9 @@ var Matrix={
         var _self=this;
         for(var i=0;i<arr.length;i++){
             if(arr[i].questiontype==0){
-                arr[i].checkoption=ko.observableArray([]);
+                if(!arr[i].hasOwnProperty('checkoption')){
+                    arr[i].checkoption=ko.observableArray([]);
+                }
             }else if(arr[i].questiontype==5){
                 _self.ProcessMatrixData(arr[i])
             }
@@ -43,7 +45,9 @@ var Matrix={
         if(arr.selectoption!==undefined){
             for(var i=0;i<arr.selectoption.length;i++){
                 for(var j=0;j<arr.selectoption[i].option.length;j++){
-                    arr.selectoption[i].option[j].checkoption=ko.observableArray([]);
+                    if(!arr.selectoption[i].option[j].hasOwnProperty('checkoption')){
+                        arr.selectoption[i].option[j].checkoption=ko.observableArray([]);
+                    }
                 }
             }
         }
