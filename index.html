@@ -45,8 +45,17 @@
                 <!--/ko-->
 
                 <!-- ko if:questiontype==5 -->
-                <div class="matrix" data-bind="attr:{id:id,type:questiontype}">
+                <div class="question matrix" data-bind="attr:{id:id,type:questiontype}">
                     <div class="question"><span class="name" data-bind="text:questionname"></span><span class="type">量表矩阵题</span></div>
+                    <div class="check-group" data-bind="foreach:leftdepartoption">
+                        <label class="checkbox" data-bind="attr:{'for':questionid}">
+                            <span class="checkbox-input">
+                                <input type="checkbox" data-bind="value:$data,checked:$parent.selectcheckbox,attr:{id:questionid}">
+                                <span class="checkbox-inner"></span>
+                            </span>
+                            <span class="checkbox-text" data-bind="text:questionname"></span>
+                        </label>
+                    </div>
                     <div class="left_div" data-bind="visible:selectoption.length>0">
                         <div class="left_div1" data-bind="visible:selectcheckbox.length>0&&topdepartoption.length>0">
                             <table class="left_table1">
