@@ -1,0 +1,348 @@
+@{
+    ViewBag.Title = "";
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>答题页</title>
+    @Scripts.Render("~/bundles/Knockout")
+    @Styles.Render("~/Content/AnswerCommonCSS")
+    @Styles.Render("~/Content/AnswerCSS")
+
+    @*矩阵题样式表*@
+    <link rel="stylesheet" href="~/Areas/SurveyAnswer/Content/matrix.css?v=20181017">
+
+    <!--[if IE]>
+        <link href="../../Areas/SurveyAnswer/Content/AnswerIE.css" rel="stylesheet" />
+    <![endif]-->
+    <!--[if IE 9]>
+        <link href="../../Areas/SurveyAnswer/Content/AnswerIE9.css" rel="stylesheet" />
+    <![endif]-->
+    <!--[if IE 8]>
+        <link href="../../Areas/SurveyAnswer/Content/AnswerIE8.css" rel="stylesheet" />
+    <![endif]-->
+    <!--[if IE 7]>
+        <link href="../../Areas/SurveyAnswer/Content/AnswerIE7.css" rel="stylesheet" />
+        <script src="../../Areas/SurveyAnswer/Scripts/json2.js"></script>
+    <![endif]-->
+
+         @Scripts.Render("~/bundles/CommonJS")
+    <script src="~/AnswerLanguage/@(ViewBag.Lang==null?"cn":ViewBag.Lang)js?v=@(ViewBag.Version)"></script>
+
+</head>
+<body>
+    <input type="hidden" id="hidProjectId" value="@ViewBag.ProjectId" />
+    <input type="hidden" id="hidUserCode" value="@ViewBag.UserCode" />
+    <input type="hidden" id="hidLanguage" value="@ViewBag.Language" />
+    <input type="hidden" id="hidClientCode" value="@ViewBag.ClientCode" />
+    <div class="wrapper" data-bind="css:{'help':showHelp}" style="display:none">
+        <div class="answer-header">
+            <div class="progress">
+               
+                <div class="progress-bar progress-bar-success" data-bind="style: {width: currentProgress()+'%'}">
+                    <span data-bind="text:currentProgress()+'%'"></span>
+                </div>
+
+            </div>
+            <div class="answer-help" data-bind="visible:helpText()!='',event:{click:helpClick}">
+                <i class="vx-icon-bangzhu"></i>
+            </div>
+        </div>
+        <div class="answer-content-header"></div>
+        <div class="answer-content">
+            <div class="waterMark" data-bind="text: waterMark"></div>
+            @*问卷页内容*@
+            <div class="content" data-bind="visible:!showHelp()">
+                <div class="logo clearfix">
+                    <div class="compony-logo" data-bind="style:{'display':logImg()!=''?'block':'none'}">
+                        <img data-bind="attr:{'src':logImg()}" alt="" onload="AutoResizeImage(160,80,this)" />
+                    </div>
+                    <div class="knx-logo"></div>
+                </div>
+                <div class="question-content-wrap">
+                    <div class="answer-title" data-bind="text: questionnaireTitle"></div>
+
+                    <div data-bind="foreach: pageList">
+                        @*单选单选题*@
+                        <!-- ko if: questiontype ==0 -->
+                        <div class="question" data-bind="css:{'question-select':displaystyle==2}">
+                            <div class="question-title">
+                                <span class="question-title-num" data-bind="text:shownum()"></span>
+                                <span class="question-title-content" data-bind="html:questionname"></span>
+                                <button data-bind="with:$parent.currentLan,visible:isrequired" type="button" class="button-danger">
+                                    <span data-bind="text:Required"></span>
+                                </button>
+                            </div>
+
+                            <div class="question-tip" data-bind="text:$parent.currentLan().Prompt+'：'+tipname,visible:tipname!=''&&tipname!=null"></div>
+
+                            <!-- ko if:displaystyle!=2-->
+                            <div class="error-tip-wrap" data-bind="css:{'error-tip':checkoption()==''&&showerror}"><span data-bind="text: $parent.currentLan().MustAnswerMsg,visible:checkoption()==''&&showerror"></span></div>
+                            <div class="question-options clearfix " data-bind="foreach: option,css:{'show-option-1':rownum==1&&displaystyle==1,'show-option-2':rownum==2&&displaystyle==1,'show-option-3':rownum==3&&displaystyle==1,'show-option-4':rownum==4&&displaystyle==1,'show-option-5':rownum==5&&displaystyle==1,'show-option-6':displaystyle==0}">
+                                <label class="radio" data-bind="attr: {'for':id}">
+                                    <span class="radio-input">
+                                        <input type="radio" data-bind="value:id,checked:$parent.checkoption,attr: {'id':id},event:{change:$root.saveAnswerlocalStorage.bind({pdata:$parentContext.$data})}">
+                                        <span class="radio-inner"></span>
+                                    </span>
+                                    <span data-bind="text: optionname"></span>
+                                </label>
+                            </div>
+                            <!--/ko-->
+                            <!-- ko if:displaystyle==2-->
+                            <div class="error-tip-wrap" data-bind="css:{'error-tip':checkoption()==undefined&&showerror}"><span data-bind="text: $parent.currentLan().MustAnswerMsg,visible:checkoption()==undefined&&showerror"></span></div>
+                            <select class="form-control"
+                                    data-bind="optionsCaption:$parent.currentLan().SelectMsg,options: option,value:checkoption,optionsText: 'optionname', optionsValue: 'id',event:{change:$root.saveAnswerlocalStorage.bind({pdata:$parent})}"></select>
+                            <!--/ko-->
+                        </div>
+                        <!-- /ko -->
+                        @*多选题*@
+                        <!-- ko if: questiontype ==1 -->
+                        <div class="question question-checkbox-block">
+                            <div class="question-title">
+                                <span class="question-title-num" data-bind="text:shownum()"></span>
+                                <span class="question-title-content" data-bind="html:questionname"></span>
+                                <button data-bind="with:$parent.currentLan,visible:isrequired" type="button" class="button-danger">
+                                    <span data-bind="text:Required"></span>
+                                </button>
+                            </div>
+                           
+                            <div class="question-tip" data-bind="text:$parent.currentLan().Prompt+'：'+tipname,visible:tipname!=''&&tipname!=null"></div>
+                            <div class="error-tip-wrap" data-bind="css:{'error-tip':showerror()}">
+                            <span data-bind="text: $parent.currentLan().MustAnswerMsg,visible:checkoption()==''&&showerror()"></span>
+                              <span  data-bind="text:showMinmassage(),visible: checkoption()!=''&&showerror"></span>  
+                            </div>
+                            <div class="question-options clearfix " data-bind="foreach: option,css:{'show-option-1':rownum==1,'show-option-2':rownum==2,'show-option-3':rownum==3,'show-option-4':rownum==4,'show-option-5':rownum==5,'show-option-1':rownum==0}">
+                                <label class="checkbox" data-bind="attr: {'for':id}">
+                                    <span class="checkbox-input">
+                                        <input type="checkbox" data-bind="value:id,checked:$parent.checkoption,attr: {'id':id},event:{change:$root.changeClick.bind({id:id,queindex:$parentContext.$index(),data:$data,value:$parent.checkoption(),isrequired:$parent.isrequired,multiminnum:$parent.multiminnum,multimaxnum:$parent.multimaxnum})}">
+                                        <span class="checkbox-inner"></span>
+                                    </span>
+                                    <span data-bind="text: optionname"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: questiontype ==2 -->
+                        <div class="question question-checkbox-block checkbox-open-question">
+                            <div class="question-title">
+                                <span class="question-title-num" data-bind="text:shownum"></span>
+                                <span class="question-title-content" data-bind="html:questionname"></span>
+                                <button data-bind="with:$parent.currentLan,visible:isrequired" type="button" class="button-danger">
+                                    <span data-bind="text:Required"></span>
+                                </button>
+                            </div>
+
+                            <!--ko if:option.length>0-->
+                            <div class="question-tip" data-bind="text:$parent.currentLan().Prompt+'：'+tipname,visible:tipname!=''&&tipname!=null"></div>
+                            <div class="error-tip-wrap" data-bind="css:{'error-tip':showerror}">
+                          <span data-bind="text: $parent.currentLan().MustAnswerMsg,visible:showMinmassage()==''&&showerror"></span>
+                           <span  data-bind="text:showMinmassage(),visible: showMinmassage()!=''&&showerror"></span> 
+                            </div>
+                            <div class="question-options" data-bind="foreach: option">
+                                <label class="checkbox" data-bind="attr: {'for':id}">
+                                    <span class="checkbox-input">
+                                        <input type="checkbox" data-bind="value:id,checked:$parent.checkoption,attr: {'id':id},event:{change:$root.changeOptionClick.bind({data:$data,pdata:$parentContext.$data})}">
+                                        <span class="checkbox-inner"></span>
+                                    </span>
+                                    <span data-bind="text: optionname"></span>
+                                </label>
+                                <!-- ko if: $parent.issinglelinetext -->
+                                <div><input type="text" maxlength="200" data-bind="attr:{'placeholder':$root.currentLan().PlaceholderMsg},value:anslist,visible:$parent.checkoption.indexOf(id)>=0,event:{blur:$root.validateSort.bind({data:$data,parentData:$parentContext.$data})}"></div>
+                                <!-- /ko -->
+                                <!-- ko if: !$parent.issinglelinetext -->
+                                <div><textarea maxlength="200" data-bind="attr:{'placeholder':$root.currentLan().PlaceholderMsg},value:anslist,visible:$parent.checkoption.indexOf(id)>=0,event:{blur:$root.validateSort.bind({data:$data,parentData:$parentContext.$data})}" cols="60" class="form-control" rows="2"></textarea></div>
+                                <!-- /ko -->
+                            </div>
+                            <!-- /ko -->
+                            <!--ko if:option.length==0-->
+                            <div class="question-tip" data-bind="text:$parent.currentLan().Prompt+'：'+tipname,visible:tipname!=''&&tipname!=null"></div>
+                            <div class="error-tip-wrap" data-bind="css:{'error-tip':checkoption()==''&&showerror}"><span data-bind="text: $parent.currentLan().MustAnswerMsg,visible:checkoption()==''&&showerror"></span></div>
+                            <!-- ko if: issinglelinetext -->
+                            <input type="text" maxlength="200" data-bind="value:checkoption,attr:{'placeholder':$root.currentLan().PlaceholderMsg},event:{blur:$root.saveAnswerlocalStorage.bind({pdata:$parent})}" >
+                            <!-- /ko -->
+                            <!-- ko if: !issinglelinetext -->
+                            <textarea cols="60" maxlength="200" data-bind="value:checkoption,attr:{'placeholder':$root.currentLan().PlaceholderMsg},event:{blur:$root.saveAnswerlocalStorage.bind({pdata:$parent})}" class="form-control" rows="2" ></textarea>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: questiontype ==3 -->
+                        <div class="question">
+                            <div class="question-title">
+                                <span class="question-title-num" data-bind="text:shownum"></span>
+                                <span class="question-title-content" data-bind="html:questionname"></span>
+                                <button data-bind="with:$parent.currentLan,visible:isrequired" type="button" class="button-danger">
+                                    <span data-bind="text:Required"></span>
+                                </button>
+                            </div>
+                            <div class="question-tip" data-bind="text:$parent.currentLan().Prompt+'：'+tipname,visible:tipname!=''&&tipname!=null"></div>
+                            <div class="error-tip-wrap" data-bind="css:{'error-tip':checkoption()==''&&showerror}"><span data-bind="text: $parent.currentLan().MustAnswerMsg,visible:checkoption()==''&&showerror"></span></div>
+                            <ul class="sort-question" data-bind="foreach: option">
+                                <li class="sort-question-option">
+                                    <span class="sort-question-option-num"></span>
+                                    <input type="text" data-bind="value:anslist,event:{blur:$root.validateClick.bind({data:$data,parentData:$parentContext.$data})}">
+                                    <span class="sort-question-option-content" data-bind="text: optionname"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: questiontype ==4 -->
+                        <div class="question describe-question">
+                            <div class="question-title">
+                                <span class="question-title-content" data-bind="html:questionname"></span>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: questiontype ==5 -->
+                        
+                        <div class="question matrix" data-bind="attr:{id:id}">
+                            <div class="question-title">
+                                <div class="title-top">
+                                    <span data-bind="text:shownum"></span>
+                                    <span class="name" data-bind="text:questionname"></span>
+                                    <span class="required" data-bind="with:$parent.currentLan,visible:isrequired">
+                                        <span data-bind="text:Required"></span>
+                                    </span>
+                                </div>
+                                <div class="question-tip" data-bind="text:$parent.currentLan().Prompt+'：'+tipname,visible:tipname!=''&&tipname!=null"></div>
+                                <div class="error-tip-wrap" data-bind="css:{'error-tip':showerror},visible:showerror"><span data-bind="text: $parent.currentLan().MustAnswerMsg"></span></div>
+                                <div class="check-group clearbox" data-bind="foreach:leftdepartoption,visible:$root.isExtend,">
+                                    <label class="checkbox" data-bind="attr:{'for':questionid},style:{'width':$root.isMobile?'100%':'auto'}">
+                                        <span class="checkbox-input">
+                                            <input type="checkbox" data-bind="value:questionid,checked:$parent.selectcheckbox,attr:{id:questionid},event:{change:$root.MatrixChangeOption.bind($data,$parentContext.$index())}">
+                                            <span class="checkbox-inner"></span>
+                                        </span>
+                                        <span class="checkbox-text" data-bind="text:questionname"></span>
+                                    </label>
+                                </div>
+                                <div class="extend" data-bind="visible:$root.isMobile,text:$root.isExtendText,event:{click:$root.MatrixExtend}"></div>
+                            </div>
+                            <div class="left_div" data-bind="visible:selectoption.length>0">
+                                <div class="left_div1" data-bind="visible:leftcheckbox.length>0&&topdepartoption.length>0">
+                                    <table class="left_table1">
+                                        <tbody>
+                                            <tr>
+                                                <th></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="left_div2">
+                                    <table class="left_table2">
+                                        <tbody  data-bind="foreach:leftcheckbox,visible:leftcheckbox.length>0">
+                                            <tr class='left_tr'>
+                                                <th data-bind="text:questionname,attr:{questionid:questionid}"></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="right_div" data-bind="css:{'right_width':leftcheckbox.length===0},visible:selectoption.length>0">
+                                <div class="right_div1">
+                                    <table class="right_table1">
+                                        <tbody>
+                                            <tr data-bind="foreach:topdepartoption">
+                                                <th data-bind="text:questionname,attr:{questionid:questionid}"></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="right_div2">
+                                    <table class="right_table2">
+                                        <tbody data-bind="foreach:selectoption">
+                                            <tr class='right_tr' data-bind="foreach:option">
+                                                <td data-bind="attr:{leftdepartmentid:$parent.leftdepartmentid,topdepartmentid:topdepartmentid,id:'Left'+$parent.leftdepartmentid+'Top'+topdepartmentid}">
+                                                    <select data-bind="optionsCaption:'请选择',
+                                                            options: option,
+                                                            value:checkoption,
+                                                            optionsText: 'optionname',
+                                                            optionsValue: 'optionid',event:{change:$root.saveAnswerlocalStorage.bind({pdata:$parent})}"></select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="clearfix clearHeight"></div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="content-btn-group">
+                    <button class="btn btn-default prev-btn" type="submit" data-bind="text: currentLan().PrevPage,event:{click:$root.prevClick},visible:showPrev()"></button>
+                    <button class="btn btn-default" type="submit" data-bind="text: currentLan().NextPage,event:{click:$root.nextClick},visible:!showCode()"></button>
+                    <div class="validate-code" data-bind="visible:showCode()&&isOpenCode()">
+                        <input class="validate-input" maxlength="4" type="text" data-bind="value:inputCode,event:{blur:numberClick}" />
+                        <img class="validate-img" data-bind="attr:{'src':randCode()},event:{click:$root.changeCodeClick}" />
+                    </div>
+                    <button class="btn btn-primary" type="submit" data-bind="text:currentLan().SubmitTitle,event:{click:$root.submitClick},visible:showCode()"></button>
+                </div>
+                @*确定提交问卷提示框*@
+                <div class="modal fade message-box-mask">
+                    <div class="modal-dialog message-box">
+                    	<div class="modal-content">	                        
+                             <div class="modal-header ">	                            
+                                <h4 class="modal-title" data-bind="html:currentLan().submitHeadTip"></h4>	                        
+                            </div>	                        
+                            <div class="modal-body">	                            
+                                <p class="dialog-body-icon"><i class="vx-icon-TiShiTuBiao1"></i></p>	                            
+                                <p class="dialog-body-text" data-bind="html:submitTip()" ></p>	                        
+                            </div>	                        
+                            <div class="modal-footer">
+                                <button class="btn btn-default btn-confirm"  data-bind="text:currentLan().submitconfimTip,event:{click:$root.popConfirmClick}"></button>
+                                <button class="btn btn-default btn-cancel" data-bind="text:currentLan().submitcanclickTip,event:{click:$root.popCancelClick}">取消</button>
+                            </div>	                    
+                        </div>	                
+                    </div>
+                </div>
+                <div class="modal-backdrop fade"></div>
+            </div>
+            @*帮助页内容*@
+            <div class="content" data-bind="visible:showHelp()">
+                <div class="content-help" data-bind="html:helpText()">
+                </div>
+                <div class="content-btn-group">
+                    <input class="btn btn-primary close-help" data-bind="event:{click:closeClick},value:currentLan().CloseMsg" type="button">
+                </div>
+            </div>
+            @*移动端水印及背景图*@
+            <div class="water-mark-wrap"></div>
+            <div class="water-content">
+                <div class="waterMark" data-bind="text: waterMark"></div>
+                <img class="bg-image" data-bind="attr:{'src':mobileImg()},style:{'display':mobileImg()!=''?'block':'none'}" />
+            </div>
+        </div>
+        <div class="answer-footer" data-bind="text:currentLan().KnxAddress"></div>
+    </div>
+    @*loading加载页*@
+    <div class="vx-load">
+        <div class="loader-inner ball-scale-multiple">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <p class="loading-text">数据加载中...</p>
+    </div>
+    @*message消息框*@
+    <div class="modal-message" data-bind="visible:isShowMessage">
+        <div class="model-message-img warning"></div>
+        <span data-bind="text:showMessage"></span>
+    </div>
+</body>
+
+@*矩阵题依赖滚动条插件jquery.nicescroll.js*@
+<script src="~/Areas/SurveyAnswer/Scripts/jquery.nicescroll.js" type="text/javascript"></script>
+
+@*矩阵题生成处理文件*@
+<script src="~/Areas/SurveyAnswer/Scripts/matrix.js" type="text/javascript"></script>
+
+<script src="~/Areas/SurveyAnswer/Scripts/SVAnswer.js" type="text/javascript"></script>
+</html>

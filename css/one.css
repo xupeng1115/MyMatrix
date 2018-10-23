@@ -1,0 +1,436 @@
+/****************************矩阵题样式表*****************************/
+@charset "utf-8";
+html,body{
+    position:relative;
+    width:100%;
+	-webkit-text-size-adjust: 100%;
+	-webkit-overflow-scrolling: touch;
+	font-size: 14px;
+	color: #333;
+}
+
+ul{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+a{
+	color:#6d6d6d;
+    text-decoration: none; 
+}
+
+a:link,
+a:active,
+a:visited,
+a:hover{
+	text-decoration:none;
+	color:#6d6d6d;
+}
+
+input:-moz-placeholder,   
+textarea:-moz-placeholder {   
+    color: #999999;   
+}   
+
+input:-ms-input-placeholder,   
+textarea:-ms-input-placeholder {   
+    color: #999999;   
+}   
+
+input::-webkit-input-placeholder,   
+textarea::-webkit-input-placeholder {   
+    color: #999999;   
+} 
+
+.clearfix{
+	display:block;
+	content:" ";
+	clear:both;
+	*zoom:1;
+}
+
+.clearHeight{
+    height:50px;
+}
+
+.clearIE8Height{
+    height:50px;
+}
+
+.overflow_text{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+.clearbox{
+    display:block;
+    font-size:0;
+    *zoom:1;
+}
+
+.clearbox::before{
+	display:block;
+	content:"";
+	clear:both;
+    font-size:0;
+    height:0;
+	*zoom:1;
+}
+
+.clearbox::after{
+	display:block;
+	content:"";
+	clear:both;
+    font-size:0;
+    height:0;
+	*zoom:1;
+}
+
+/****************************矩阵题内容*****************************/
+.question-content-wrap .matrix{
+
+    display:block;
+	width:100%;
+	-webkit-text-size-adjust: 100%;
+	-webkit-overflow-scrolling: touch;
+}
+
+.question-content-wrap .mBorder{
+    border-bottom:1px solid #dcdce0;
+}
+
+.question-content-wrap .matrix .question-title{
+	width:100%;
+	font-size:12px;
+	padding-bottom:20px;
+	color:#323232;
+	line-height:16px;
+}
+
+.question-content-wrap .matrix .qBorder{
+    border-bottom:1px solid #dcdce0;
+}
+
+.question-content-wrap .matrix .question-title span{
+	display:inline-block;
+}
+
+.question-content-wrap .matrix .question-title .title-top{
+    position:relative;
+    width:100%;
+}
+
+.question-content-wrap .matrix .question-title .title-top span.name{
+	margin-right:5px;
+    line-height:16px;
+}
+
+.question-content-wrap .matrix .question-title .title-top span.required {
+    font-size: 12px;
+    color: #fff;
+    padding: 1px 6px;
+    border-radius: 2px;
+    background-color: #fc8e8c;
+}
+.question-content-wrap .matrix .question-title .error-tip{
+    line-height:20px;
+    color:#fc8e8c;
+}
+
+.question-content-wrap .matrix .question-title .extend{
+    font-size:14px;
+    text-align:right;
+}
+
+/***************checkbox*****************/
+.question-content-wrap .matrix .question-title .check-group{
+	position:relative;
+	display: block;
+	font-size:13px;
+    padding-top:10px;
+}
+
+.question-content-wrap .matrix .question-title .check-group .checkbox{
+	display:block;
+	float:left;
+	position: relative;
+	-moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    cursor: pointer;
+	word-break: break-all;
+	margin-bottom:10px;
+	line-height:18px;
+}
+
+.question-content-wrap .matrix .question-title .check-group .checkbox .checkbox-input{
+    cursor: pointer;
+	float:left;
+	margin-top:1px;
+	margin-right:5px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.question-content-wrap .matrix .question-title .check-group .checkbox .checkbox-text{
+	text-align:left;
+	margin-right:15px;
+}
+
+.question-content-wrap .matrix .question-title .check-group .checkbox .checkbox-input input[type=checkbox]{
+	display:none;
+	outline: 0;
+}
+
+.question-content-wrap .matrix .question-title .check-group .checkbox .checkbox-input .checkbox-inner{
+	width: 12px;
+    height: 12px;
+    display: inline-block;
+    position: relative;
+    border-radius: 2px;
+    border-color: #BFBFBF;
+    border: 1px solid #bfcbd9;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.question-content-wrap .matrix .question-title .check-group .checkbox .checkbox-input .checkbox-inner::after{
+	content: "";
+	height: 6px;
+    width: 3px;
+    position: absolute;
+    left: 2px;
+    top: 0px;
+    box-sizing: content-box;
+    border: 2px solid #fff;
+    border-left: 0;
+    border-top: 0;
+    -ms-transform: rotate(45deg) scaleY(1);
+    transform: rotate(45deg) scaleY(1);
+    transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
+    -ms-transform-origin: center;
+    transform-origin: center;
+}
+
+.question-content-wrap .matrix .question-title .check-group .checkbox .checkbox-input input[type=checkbox]:checked+.checkbox-inner{
+	border-color: #6090df;
+    background: #6090df;
+}
+
+
+.question-content-wrap .matrix table {
+
+	border-spacing: 0;
+	border-collapse: collapse;
+	background-color: transparent;
+}
+
+.left_div {
+
+	width: 68px;
+	float: left;
+}
+
+.left_div1 {
+	background:#e4efff;
+}
+
+.left_div2 {
+	max-height: 250px;
+	overflow: hidden;
+	background:#f4f8ff;
+}
+
+.left_table1 th {
+    box-sizing:content-box;
+    -moz-box-sizing:content-box; /* Firefox */
+    -webkit-box-sizing:content-box; /* Safari */
+
+	text-align: center;
+	height:40px;
+	line-height: 1.42857143;
+	vertical-align: middle;
+	color:#323232;
+	font-size:12px;
+	font-weight:500;
+
+    word-wrap:break-word;
+	word-break:break-all; 
+}
+
+.left_table2 th {
+    box-sizing:content-box;
+    -moz-box-sizing:content-box; /* Firefox */
+    -webkit-box-sizing:content-box; /* Safari */
+
+	text-align: left;
+	padding: 16px 10px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	color:#323232;
+	font-size:12px;
+	font-weight:500;
+
+    word-wrap:break-word;
+	word-break:break-all; 
+}
+
+.right_div {
+	float: left;
+}
+
+.right_width{
+	width:100%;
+}
+
+.right_div1 {
+	overflow: hidden;
+	background:#e4efff;
+}
+
+.right_div2 {
+	position: relative;
+	max-height: 250px;
+	overflow: hidden;
+	-webkit-text-size-adjust: 100%;
+	-webkit-overflow-scrolling: touch;
+}
+
+.right_table1 {
+	table-layout:fixed;
+	/**给标题tabel一个默认的宽度,手机浏览器打开也能固定长度**/
+	width: 0px;
+}
+
+.right_table2 {
+	table-layout:fixed;
+	/**给选项tabel一个默认的宽度,手机浏览器打开也能固定长度**/
+	width: 0px;
+}
+
+.right_table1 th {
+    box-sizing:content-box;
+    -moz-box-sizing:content-box; /* Firefox */
+    -webkit-box-sizing:content-box; /* Safari */
+
+	width: 80px;
+	height:0;
+	padding: 12px 0px 12px 20px;
+	font-weight:500;
+	color:#323232;
+	text-align: left;
+	vertical-align: middle;
+	font-size:12px;
+	line-height: 1.42857143;
+
+    word-wrap:break-word;
+	word-break:break-all; 
+}
+
+.right_table2 td {
+    box-sizing:content-box;
+    -moz-box-sizing:content-box; /* Firefox */
+    -webkit-box-sizing:content-box; /* Safari */
+
+	width: 80px;
+	padding-left:20px;
+	text-align: center;
+	line-height: 1.42857143;
+	vertical-align: middle;
+	color:#323232;
+	font-size:12px;
+	font-weight:500;
+}
+
+.right_width .right_table1 th{
+	padding: 12px 10px;
+}
+
+.right_width .right_table2 td{
+	padding: 10px;
+}
+
+.right_table2 td select::-ms-expand {
+	display: none;
+}
+
+.right_table2 td select{
+    box-sizing:;
+    -moz-box-sizing:; /* Firefox */
+    -webkit-box-sizing:; /* Safari */
+
+	display:block;
+	width:80px;
+    padding:0;
+	padding-left:6px;
+	height:28px;
+	font-size:12px;
+	text-align:left;
+	vertical-align:middle;
+    line-height:29px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTZEaa/1AAAAwklEQVRIS8XQsQkCQRCF4YtMBAVjCzDR7cLSTK3AJkxMLMCu1nfHKsv4O3LJc+AL7j+GgR1qrX+F0QmjE0YnjE4YnTA6YXTC6ITRCWNmztB+hDFTyrH8sGz3cT/CmNGBq9QvHrJr93E/wpjRgYVc2sHeXQ7t9jS0H2HMjKNDKzm3w6Ob7Kef3dB+hDHzGh3cyKkdfz97P7QfYcz0o8Nr2bbPj6H9CGNmztB+hNEJoxNGJ4xOGJ0wOmF0wuiE0QmjTx2eBK6bMXIimFQAAAAASUVORK5CYII=),linear-gradient(to top, #dcdce0, #fff);
+    background-repeat:no-repeat,no-repeat;
+    background-position:right,center;
+    color: #323232;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	-moz-appearance: none;
+    -webkit-appearance: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+	user-select: none;
+}
+
+.right_table2 td select:hover {
+	border-color: #6090df;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTZEaa/1AAAAwklEQVRIS8XQsQkCQRCF4YtMBAVjCzDR7cLSTK3AJkxMLMCu1nfHKsv4O3LJc+AL7j+GgR1qrX+F0QmjE0YnjE4YnTA6YXTC6ITRCWNmztB+hDFTyrH8sGz3cT/CmNGBq9QvHrJr93E/wpjRgYVc2sHeXQ7t9jS0H2HMjKNDKzm3w6Ob7Kef3dB+hDHzGh3cyKkdfz97P7QfYcz0o8Nr2bbPj6H9CGNmztB+hNEJoxNGJ4xOGJ0wOmF0wuiE0QmjTx2eBK6bMXIimFQAAAAASUVORK5CYII=),linear-gradient(to top, #f1f2f6, #fff);
+	background-repeat: no-repeat, no-repeat;
+	background-position: 100% 0, 0px 0;
+}
+
+.right_table2 td select:focus {
+	border-color: #6090df;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	outline: 0;
+}
+
+.right_table2 td select option {
+    box-sizing:content-box;
+    -moz-box-sizing:content-box; /* Firefox */
+    -webkit-box-sizing:content-box; /* Safari */
+
+	background-color: #fff;
+}
+
+.right_table2 td select option[disabled=disabled] {
+	color: #bfcbd9;
+	background-color: #fff;
+}
+
+.right_table2 td select:disabled {
+	background-color: #ededef;
+	border: none;
+	background-image: none;
+	cursor: not-allowed;
+	color: #bbb;
+}
+
+
+
+
+
+
+
+
