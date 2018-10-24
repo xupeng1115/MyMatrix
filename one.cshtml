@@ -215,7 +215,7 @@
                                 <div class="question-tip" data-bind="text:$parent.currentLan().Prompt+'：'+tipname,visible:tipname!=''&&tipname!=null"></div>
                                 <div class="error-tip-wrap" data-bind="css:{'error-tip':showerror},visible:showerror"><span data-bind="text: $parent.currentLan().MustAnswerMsg"></span></div>
                                 <div class="check-group clearbox" data-bind="foreach:leftdepartoption,visible:$root.isExtend,">
-                                    <label class="checkbox" data-bind="attr:{'for':questionid},style:{'width':$root.isMobile?'100%':'auto'}">
+                                    <label class="checkbox" data-bind="attr:{'for':questionid},style:{'width':$root.isMobile()?'100%':'auto'}">
                                         <span class="checkbox-input">
                                             <input type="checkbox" data-bind="value:questionid,checked:$parent.selectcheckbox,attr:{id:questionid},event:{change:$root.MatrixChangeOption.bind($data,$parentContext.$index())}">
                                             <span class="checkbox-inner"></span>

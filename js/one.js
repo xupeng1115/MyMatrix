@@ -2183,6 +2183,7 @@ var Matrix = {
         })
     },
     RequiredMatrix:function(obj){                           //单个矩阵题必填验证并处理
+        var _self=this;
         var KEY = true;         //true:全部填答,false:没有全部填答
         for (var j = 0; j < obj.selectoption.length; j++) {
             var LineID = obj.selectoption[j].leftdepartmentid;
@@ -2230,8 +2231,15 @@ var Matrix = {
         return arr;
     },
     ProcessMatrixData: function (arr) {        //处理一条矩阵数据
-        arr.selectcheckbox = [];    //手动添加selectcheckox字段
-        arr.leftcheckbox = [];
+        //手动添加selectcheckox,leftcheckbox字段
+        if (!arr.selectcheckbox) {
+            arr.selectcheckbox = [];
+        }
+
+        if (!arr.leftcheckbox) {
+            arr.leftcheckbox = [];
+        }
+        
         for (var i = 0; i < arr.selectoption.length; i++) {
             arr.leftcheckbox.push({ questionid: arr.selectoption[i].leftdepartmentid, questionname: arr.selectoption[i].leftdepartmentname });
             arr.selectcheckbox.push(arr.selectoption[i].leftdepartmentid);

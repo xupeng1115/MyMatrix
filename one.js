@@ -1,4 +1,3 @@
-var viewModel = {};
 var isMobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
 var __listData = null,//所有数据
     __curQuestionnaire = 0,//默认问卷索引
@@ -13,7 +12,7 @@ var __projectId = $("#hidProjectId").val(),
     __clientCode = $("#hidClientCode").val();
 var curkey = "curContent" + "-" + __projectId + "-" + __userCode + "-" + __language + "-" + __clientCode;
 $(document).ready(function () {
-    viewModel = {
+    var viewModel = {
         currentProgress: ko.observable(0),//当前进度
         pageList: ko.observableArray([]),//页面渲染数据
         questionnaireTitle: ko.observable(""),
@@ -39,9 +38,9 @@ $(document).ready(function () {
         questionSum: ko.observable(100),
         questionNoanswercount: ko.observable(100),
         questionListAnswer: ko.observable([]),
-        isMobile: ko.observable(isMobile),
-        isExtend: ko.observable(true),
-        isExtendText:ko.observable('收起'),
+        isMobile: ko.observable(isMobile),      //是否是移动端
+        isExtend: ko.observable(true),          //是否展开矩阵题checkbox选项区
+        isExtendText:ko.observable('收起'),     //展开选项文本
         getPageList: function () {
             var that = this;
             var pageList = __listData;
@@ -98,12 +97,12 @@ $(document).ready(function () {
                     oq = clist;
 
                 that.pageList(oq);              
-                console.log(that.pageList());
                 //数据绑定后，设置矩阵题样式(包括矩阵题，滚动条，固定行和列,必填验证)
                 Matrix.SetMatrix(0,that.pageList());
             }
 
         },
+        //矩阵题行选择框收起和展开
         MatrixExtend: function () {
             if (viewModel.isExtend()) {
                 viewModel.isExtend(false);
@@ -112,18 +111,17 @@ $(document).ready(function () {
                 viewModel.isExtend(true);
                 viewModel.isExtendText('收起');
             }
+
+            //重置滚动条位置
+            $(".right_div2").getNiceScroll().resize();
         },
+        //矩阵题行选择框功能
         MatrixChangeOption: function (index, data) {
-            console.log(index);
-            console.log(data);
-            setTimeout(function () {
 
             var selectcheckbox = viewModel.pageList()[index].selectcheckbox;
             var leftoption = viewModel.pageList()[index].leftcheckbox;
             var selectoption = viewModel.pageList()[index].selectoption;
 
-            console.log(selectcheckbox);
-            console.log(leftoption);
             if (selectcheckbox.length > leftoption.length) {
                 viewModel.pageList()[index].leftcheckbox.push(data);
             } else {
@@ -134,7 +132,6 @@ $(document).ready(function () {
                 }
             }
             
-
             if (viewModel.pageList()[index].selectoption.length > selectcheckbox.length) {
                 for (var m = 0; m < viewModel.pageList()[index].selectoption.length; m++) {
                     if (viewModel.pageList()[index].selectoption[m].leftdepartmentid == data.questionid) {
@@ -142,58 +139,46 @@ $(document).ready(function () {
                     }
                 }
             } else {
-                if(viewModel.pageList()[index].selectoption.length>0){
-                    var option = $.extend([], viewModel.pageList()[index].selectoption[0].option);
-                    for (var k = 0; k < option.length; k++) {
-                        option.checkoption = ko.observableArray([]);
-                    }
+                var option1=[],option2=[];
+                var topoption=viewModel.pageList()[index].topdepartoption;
+                var suboption = viewModel.pageList()[index].option;
 
-                    var obj = {
-                        leftdepartmentid: data.questionid,
-                        leftdepartmentname: data.questionname,
-                        option: option
+                for (var a = 0; a < suboption.length; a++) {
+                    var obj1 = {};
+                    obj1 = {
+                        optionid: suboption[a].id,
+                        optionname: suboption[a].optionname
                     }
-                    viewModel.pageList()[index].selectoption.push(obj);
-                } else {
-                    var option1=[],option2=[];
-                    var topoption=viewModel.pageList()[index].topdepartoption;
-                    var suboption = viewModel.pageList()[index].option;
-
-                    for (var a = 0; a < suboption.length; a++) {
-                        var obj1 = {};
-                        obj1 = {
-                            optionid: suboption[a].id,
-                            optionname: suboption[a].optionname
-                        }
-                        option1.push(obj1);
-                    }
-
-                    for (var b = 0; b < topoption.length; b++) {
-                        var obj2 = {};
-                        obj2.checkoption = ko.observableArray([]);
-                        obj2.topdepartmentid = topoption[b].questionid;
-                        obj2.option = option1;
-                        option2.push(obj2);
-                    }
-
-                    var obj3 = {
-                        leftdepartmentid: data.questionid,
-                        leftdepartmentname: data.questionname,
-                        option: option2
-                    }
-                    viewModel.pageList()[index].selectoption.push(obj3);
+                    option1.push(obj1);
                 }
+
+                for (var b = 0; b < topoption.length; b++) {
+                    var obj2 = {};
+                    obj2.checkoption = ko.observableArray([]);
+                    obj2.topdepartmentid = topoption[b].questionid;
+                    obj2.option = option1;
+                    option2.push(obj2);
+                }
+
+                var obj3 = {
+                    leftdepartmentid: data.questionid,
+                    leftdepartmentname: data.questionname,
+                    option: option2
+                }
+                viewModel.pageList()[index].selectoption.push(obj3);
                 
             }
 
             var arr = $.extend([], viewModel.pageList());
-            console.log(arr);
             viewModel.pageList([]);
             viewModel.pageList(arr);
-            Matrix.SetMatrix(0, viewModel.pageList());
+            console.log(viewModel.pageList());
 
-            }, 300)
-            
+            //重置滚动条样式和矩阵列表样式
+            Matrix.SetTableLine2();
+            Matrix.SetRightTable();
+            Matrix.SetScroll($(".right_div2"));
+
         },
         isSubmitTip: ko.observable(false),
         projectmethod: ko.observable(0),
@@ -318,7 +303,8 @@ $(document).ready(function () {
 
                 //验证并设置矩阵题
                 if (list[i].questiontype == 5 && list[i].isrequired) {
-                    if (Matrix.RequiredMatrix(list[i])) {
+
+                    if (!Matrix.RequiredMatrix(list[i])) {
                         list[i].showerror(true);
                         flag = false;
                     } else {
@@ -690,11 +676,11 @@ $(document).ready(function () {
         },
         //下一页
         nextClick: function () {
-            //翻页首先隐藏矩阵题滚动条
-            Matrix.MatrixHideScrollBar();
-
+            
             var validate = this.validateRequired();
             if (!validate) {
+                //验证为通过时矩阵题滚动条重置位置
+                $(".right_div2").getNiceScroll().resize();
 
                 var isError = $(".question").find('.error-tip')[0];
                 var total = isError.offsetTop - 130;
@@ -702,6 +688,10 @@ $(document).ready(function () {
                 $('html,body').animate({ scrollTop: total }, 800);
                 return false;
             }
+
+            //翻页首先隐藏矩阵题滚动条
+            Matrix.MatrixHideScrollBar();
+
             //viewModel.clearlocalStorage(__curQuestion);
             window.parent.scrollTo(0, 0);
             var result = this.saveNextAnswer();
@@ -1304,7 +1294,7 @@ $(document).ready(function () {
         async: false,
         data: JSON.stringify({ projectId: __projectId, clientCode: __clientCode, userCode: __userCode, deviceId: viewModel.getDeviceId(), language: __language }),
         success: function (result) {
-            console.log(result.data.Questionnaire);
+            //console.log(result.data.Questionnaire);
             if (result.success) {
                 //加绑定值的属性
                 var pageList = result.data.Questionnaire; 
