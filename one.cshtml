@@ -147,6 +147,7 @@
                            <span  data-bind="text:showMinmassage(),visible: showMinmassage()!=''&&showerror"></span> 
                             </div>
                             <div class="question-options" data-bind="foreach: option">
+
                                 <label class="checkbox" data-bind="attr: {'for':id}">
                                     <span class="checkbox-input">
                                         <input type="checkbox" data-bind="value:id,checked:$parent.checkoption,attr: {'id':id},event:{change:$root.changeOptionClick.bind({data:$data,pdata:$parentContext.$data})}">
@@ -154,6 +155,7 @@
                                     </span>
                                     <span data-bind="text: optionname"></span>
                                 </label>
+
                                 <!-- ko if: $parent.issinglelinetext -->
                                 <div><input type="text" maxlength="200" data-bind="attr:{'placeholder':$root.currentLan().PlaceholderMsg},value:anslist,visible:$parent.checkoption.indexOf(id)>=0,event:{blur:$root.validateSort.bind({data:$data,parentData:$parentContext.$data})}"></div>
                                 <!-- /ko -->
@@ -213,17 +215,18 @@
                                     </span>
                                 </div>
                                 <div class="question-tip" data-bind="text:$parent.currentLan().Prompt+'：'+tipname,visible:tipname!=''&&tipname!=null"></div>
-                                <div class="error-tip-wrap" data-bind="css:{'error-tip':showerror},visible:showerror"><span data-bind="text: $parent.currentLan().MustAnswerMsg"></span></div>
+                                <div class="error-tip-wrap" data-bind="css:{'error-tip':showerror},attr:{id:'matrix_error'+id},visible:showerror"><span data-bind="text: $parent.currentLan().MustAnswerMsg"></span></div>
                                 <div class="check-group clearbox" data-bind="foreach:leftdepartoption,visible:$root.isExtend,">
                                     <label class="checkbox" data-bind="attr:{'for':questionid},style:{'width':$root.isMobile()?'100%':'auto'}">
                                         <span class="checkbox-input">
                                             <input type="checkbox" data-bind="value:questionid,checked:$parent.selectcheckbox,attr:{id:questionid},event:{change:$root.MatrixChangeOption.bind($data,$parentContext.$index())}">
                                             <span class="checkbox-inner"></span>
                                         </span>
-                                        <span class="checkbox-text" data-bind="text:questionname"></span>
+                                        <span data-bind="text:questionname"></span>
                                     </label>
                                 </div>
                                 <div class="extend" data-bind="visible:$root.isMobile,text:$root.isExtendText,event:{click:$root.MatrixExtend}"></div>
+                                <div class="clearfix"></div>
                             </div>
                             <div class="left_div" data-bind="visible:selectoption.length>0">
                                 <div class="left_div1" data-bind="visible:leftcheckbox.length>0&&topdepartoption.length>0">
@@ -264,7 +267,10 @@
                                                             options: option,
                                                             value:checkoption,
                                                             optionsText: 'optionname',
-                                                            optionsValue: 'optionid',event:{change:$root.saveAnswerlocalStorage.bind({pdata:$parent})}"></select>
+                                                            optionsValue: 'optionid',event:{change:$root.saveAnswerlocalStorage.bind({pdata:$parent,data:$data,parentData:$parentContext.$parent,type:$parentContext.$parent.questiontype
+
+})}"></select>
+                                                    <span class="td_IE7">*</span>
                                                 </td>
                                             </tr>
                                         </tbody>

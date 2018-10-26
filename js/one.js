@@ -1,12 +1,39 @@
 //矩阵题测试数据
-var Data = {
-    id:3,
+var Data1 = {
+    id: 200,
+    isrequired: true,
+    shownum: ko.observable(0),
+    tipname: "我是测试",
+    showerror: ko.observable(false),
+    showMinmassage:ko.observable(''),
     questionname:'在公司，创新的行为受到表彰和奖励。',
-    questiontype:5,
+    questiontype: 5,
+    option:[
+        {
+            id: 1,
+            optionname: '强烈不同意'
+        },
+        {
+            id: 2,
+            optionname: '不同意'
+        },
+        {
+            id: 3,
+            optionname: '基本不同意'
+        },
+        {
+            id: 4,
+            optionname: '基本同意'
+        },
+        {
+            id: 5,
+            optionname: '强烈同意'
+        }
+    ],
     leftdepartoption:[
         {
             questionid:1,
-            questionname:"游戏开发部"
+            questionname: "游戏开发部"
         },
         {
             questionid:2,
@@ -34,7 +61,7 @@ var Data = {
         },
         {
             questionid:8,
-            questionname:"销售市场部"
+            questionname: "销售市场部销售市场部销售市场部销售市场部销售市场部"
         }
     ],
     topdepartoption:[
@@ -48,7 +75,7 @@ var Data = {
         },
         {
             questionid:3,
-            questionname:"我对公司未来的发展前景有信心"
+            questionname: "我对公司未来的发展前景有信心我对公司未来的发展前景有信心我对公司未来的发展前景有信心我对公司未来的发展前景有信心"
         },
         {
             questionid:4,
@@ -76,13 +103,13 @@ var Data = {
         },
         {
             questionid:10,
-            questionname:"公司能够应对客户不断变化的需求"
+            questionname: "公司能够应对客户不断变化的需求公司能够应对客户不断变化的需求公司能够应对客户不断变化的需求公司能够应对客户不断变化的需求"
         }
     ],
     selectoption:[
         {
             leftdepartmentid:1,
-            leftdepartmentname:"游戏开发部",
+            leftdepartmentname: "游戏开发部",
             option:[
                 {
                     topdepartmentid:1,
@@ -338,7 +365,630 @@ var Data = {
         },
         {
             leftdepartmentid:2,
-            leftdepartmentname:"移动开发部",
+            leftdepartmentname: "游戏部",
+            option:[
+                {
+                    topdepartmentid:1,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:2,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:3,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:4,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:5,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:6,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:7,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:8,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:9,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:10,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+var Data = {
+    id: 100,
+    isrequired: true,
+    shownum: ko.observable(0),
+    tipname: "我是测试",
+    showerror: ko.observable(false),
+    showMinmassage: ko.observable(''),
+    questionname:'在公司，创新的行为受到表彰和奖励。',
+    questiontype: 5,
+    option:[
+        {
+            id: 1,
+            optionname: '强烈不同意'
+        },
+        {
+            id: 2,
+            optionname: '不同意'
+        },
+        {
+            id: 3,
+            optionname: '基本不同意'
+        },
+        {
+            id: 4,
+            optionname: '基本同意'
+        },
+        {
+            id: 5,
+            optionname: '强烈同意'
+        }
+    ],
+    leftdepartoption:[
+        {
+            questionid:1,
+            questionname: "游戏开发部游戏开发部游戏开发部游戏开发部游戏开发部游戏开发部"
+        },
+        {
+            questionid:2,
+            questionname:"移动开发部"
+        },
+        {
+            questionid:3,
+            questionname:"人事管理部"
+        },
+        {
+            questionid:4,
+            questionname:"云计算技术部"
+        },
+        {
+            questionid:5,
+            questionname:"通讯事业部"
+        },
+        {
+            questionid:6,
+            questionname:"无线网络部"
+        },
+        {
+            questionid:7,
+            questionname:"人工智能部"
+        },
+        {
+            questionid:8,
+            questionname: "销售市场部销售市场部销售市场部销售市场部销售市场部"
+        }
+    ],
+    topdepartoption:[
+        {
+            questionid:1,
+            questionname:"在公司，创新的行为受到表彰和奖励"
+        },
+        {
+            questionid:2,
+            questionname:"公司比竞争对手更快响应用户的反馈，进行产品/服务迭代"
+        },
+        {
+            questionid:3,
+            questionname: "我对公司未来的发展前景有信心我对公司未来的发展前景有信心我对公司未来的发展前景有信心我对公司未来的发展前景有信心"
+        },
+        {
+            questionid:4,
+            questionname:"总体而言，在这家公司工作我很满意"
+        },
+        {
+            questionid:5,
+            questionname:"我很少考虑去其他公司工作"
+        },
+        {
+            questionid:6,
+            questionname:"公司具有不断追求创新的动力和意愿"
+        },
+        {
+            questionid:7,
+            questionname:"非常不愿意接受外地出差"
+        },
+        {
+            questionid:8,
+            questionname:"非常适应公司氛围"
+        },
+        {
+            questionid:9,
+            questionname:"我经常付出额外的努力帮助公司取得成功"
+        },
+        {
+            questionid:10,
+            questionname: "公司能够应对客户不断变化的需求公司能够应对客户不断变化的需求公司能够应对客户不断变化的需求公司能够应对客户不断变化的需求"
+        }
+    ],
+    selectoption:[
+        {
+            leftdepartmentid:1,
+            leftdepartmentname: "游戏开发部游戏开发部游戏开发部游戏开发部游戏开发部游戏开发部",
+            option:[
+                {
+                    topdepartmentid:1,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:2,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:3,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:4,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:5,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:6,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:7,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:8,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:9,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                },
+                {
+                    topdepartmentid:10,
+                    option:[
+                        {
+                            optionid:1,
+                            optionname:'强烈不同意'
+                        },
+                        {
+                            optionid:2,
+                            optionname:'不同意'
+                        },
+                        {
+                            optionid:3,
+                            optionname:'基本不同意'
+                        },
+                        {
+                            optionid:4,
+                            optionname:'基本同意'
+                        },
+                        {
+                            optionid:5,
+                            optionname:'强烈同意'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            leftdepartmentid:2,
+            leftdepartmentname: "游戏开发部游戏开发部游戏开发部游戏开发部游戏开发部游戏开发部",
             option:[
                 {
                     topdepartmentid:1,
@@ -594,7 +1244,7 @@ var Data = {
         },
         {
             leftdepartmentid:3,
-            leftdepartmentname:"人事管理部",
+            leftdepartmentname: "人事管理部人事管理部人事管理部人事管理部人事管理部人事管理部",
             option:[
                 {
                     topdepartmentid:1,
@@ -2180,6 +2830,7 @@ var Matrix = {
         //监听select组件值变动时更新样式
         $("body").on("change", "select", function (e) {
             $(this).css("border", "1px solid #ccc");
+            $(this).next().hide();
         })
     },
     RequiredMatrix:function(obj){                           //单个矩阵题必填验证并处理
@@ -2192,6 +2843,9 @@ var Matrix = {
                     KEY = false;
                     var RowID = obj.selectoption[j].option[k].topdepartmentid;
                     $("#" + "Left" + LineID + "Top" + RowID).find("select").css("border", "1px solid #ff4949");
+                    if (_self.IsIE7()) {
+                        $("#" + "Left" + LineID + "Top" + RowID).find(".td_IE7").show();
+                    }
                 }
             }
         }
@@ -2233,18 +2887,20 @@ var Matrix = {
     ProcessMatrixData: function (arr) {        //处理一条矩阵数据
         //手动添加selectcheckox,leftcheckbox字段
         if (!arr.selectcheckbox) {
-            arr.selectcheckbox = [];
+            arr.selectcheckbox = ko.observableArray([]);
         }
 
         if (!arr.leftcheckbox) {
             arr.leftcheckbox = [];
         }
         
-        for (var i = 0; i < arr.selectoption.length; i++) {
-            arr.leftcheckbox.push({ questionid: arr.selectoption[i].leftdepartmentid, questionname: arr.selectoption[i].leftdepartmentname });
-            arr.selectcheckbox.push(arr.selectoption[i].leftdepartmentid);
-            for (var j = 0; j < arr.selectoption[i].option.length; j++) {
-                arr.selectoption[i].option[j].checkoption = ko.observableArray([]);
+        if (arr.selectoption.length > 0) {
+            for (var i = 0; i < arr.selectoption.length; i++) {
+                arr.leftcheckbox.push({ questionid: arr.selectoption[i].leftdepartmentid, questionname: arr.selectoption[i].leftdepartmentname });
+                arr.selectcheckbox.push(arr.selectoption[i].leftdepartmentid);
+                for (var j = 0; j < arr.selectoption[i].option.length; j++) {
+                    arr.selectoption[i].option[j].checkoption = ko.observableArray([]);
+                }
             }
         }
 
@@ -2285,17 +2941,20 @@ var Matrix = {
         var rightDiv = $(".right_div");
         var matrixWidth = $(".matrix").width();
         var oRightTable2 = $(".right_table2");
-        for (var i = 0; i < rightDiv.length; i++) {
-            if (oRightTable2.eq(i).width() <= (matrixWidth - 68)) {
-                rightDiv[i].style.width = (oRightTable2.eq(i).width()) + "px";
-            } else {
-                if (rightDiv.eq(i).hasClass('right_width')) {
-                    rightDiv[i].style.width = matrixWidth + "px";
+        if (rightDiv.length > 0) {
+            for (var i = 0; i < rightDiv.length; i++) {
+                if (oRightTable2.eq(i).width() <= (matrixWidth - 68)) {
+                    rightDiv[i].style.width = (oRightTable2.eq(i).width()) + "px";
                 } else {
-                    rightDiv[i].style.width = (matrixWidth - 68) + "px";
+                    if (rightDiv.eq(i).hasClass('right_width')) {
+                        rightDiv[i].style.width = matrixWidth + "px";
+                    } else {
+                        rightDiv[i].style.width = (matrixWidth - 68) + "px";
+                    }
                 }
             }
         }
+        
     },
     RegisterScroll: function (el) {                //注册滚动事件使同维table一起滚动
         el.on("scroll", function (e) {

@@ -96,11 +96,21 @@ $(document).ready(function () {
                 } else
                     oq = clist;
 
-                that.pageList(oq);              
-                //数据绑定后，设置矩阵题样式(包括矩阵题，滚动条，固定行和列,必填验证)
-                Matrix.SetMatrix(0,that.pageList());
+                that.pageList(oq);
+                
+                
             }
 
+        },
+        SetMatrixList: function () {
+            var arr = $.extend([], viewModel.pageList());
+            var oData = Matrix.ProcessMatrixData(Data1);
+            arr.push(oData);
+
+            viewModel.pageList([]);
+            viewModel.pageList(arr);
+            //数据绑定后，设置矩阵题样式(包括矩阵题，滚动条，固定行和列,必填验证)
+            Matrix.SetMatrix(0, viewModel.pageList());
         },
         //矩阵题行选择框收起和展开
         MatrixExtend: function () {
@@ -118,7 +128,25 @@ $(document).ready(function () {
         //矩阵题行选择框功能
         MatrixChangeOption: function (index, data) {
 
-            var selectcheckbox = viewModel.pageList()[index].selectcheckbox;
+            setTimeout(function () {
+                viewModel.SetMatrixChangeOption(index, data);
+
+                var arr = $.extend([], viewModel.pageList());
+                viewModel.pageList([]);
+                viewModel.pageList(arr);
+
+                //重置滚动条样式和矩阵列表样式
+                Matrix.SetTableLine1();
+                Matrix.SetTableLine2();
+                Matrix.SetRightTable();
+                Matrix.SetScroll($(".right_div2"));
+            },0)
+
+            return true;
+        },
+        SetMatrixChangeOption: function (index, data) {
+
+            var selectcheckbox = viewModel.pageList()[index].selectcheckbox();
             var leftoption = viewModel.pageList()[index].leftcheckbox;
             var selectoption = viewModel.pageList()[index].selectoption;
 
@@ -127,11 +155,11 @@ $(document).ready(function () {
             } else {
                 for (var i = 0; i < leftoption.length; i++) {
                     if (leftoption[i].questionid == data.questionid) {
-                        viewModel.pageList()[index].leftcheckbox.splice(i,1);
+                        viewModel.pageList()[index].leftcheckbox.splice(i, 1);
                     }
                 }
             }
-            
+
             if (viewModel.pageList()[index].selectoption.length > selectcheckbox.length) {
                 for (var m = 0; m < viewModel.pageList()[index].selectoption.length; m++) {
                     if (viewModel.pageList()[index].selectoption[m].leftdepartmentid == data.questionid) {
@@ -139,8 +167,8 @@ $(document).ready(function () {
                     }
                 }
             } else {
-                var option1=[],option2=[];
-                var topoption=viewModel.pageList()[index].topdepartoption;
+                var option1 = [], option2 = [];
+                var topoption = viewModel.pageList()[index].topdepartoption;
                 var suboption = viewModel.pageList()[index].option;
 
                 for (var a = 0; a < suboption.length; a++) {
@@ -154,7 +182,7 @@ $(document).ready(function () {
 
                 for (var b = 0; b < topoption.length; b++) {
                     var obj2 = {};
-                    obj2.checkoption = ko.observableArray([]);
+                    obj2.checkoption = ko.observable();
                     obj2.topdepartmentid = topoption[b].questionid;
                     obj2.option = option1;
                     option2.push(obj2);
@@ -166,19 +194,9 @@ $(document).ready(function () {
                     option: option2
                 }
                 viewModel.pageList()[index].selectoption.push(obj3);
-                
+
             }
-
-            var arr = $.extend([], viewModel.pageList());
-            viewModel.pageList([]);
-            viewModel.pageList(arr);
-            console.log(viewModel.pageList());
-
-            //重置滚动条样式和矩阵列表样式
-            Matrix.SetTableLine2();
-            Matrix.SetRightTable();
-            Matrix.SetScroll($(".right_div2"));
-
+            
         },
         isSubmitTip: ko.observable(false),
         projectmethod: ko.observable(0),
@@ -303,7 +321,7 @@ $(document).ready(function () {
 
                 //验证并设置矩阵题
                 if (list[i].questiontype == 5 && list[i].isrequired) {
-
+                    
                     if (!Matrix.RequiredMatrix(list[i])) {
                         list[i].showerror(true);
                         flag = false;
@@ -519,16 +537,16 @@ $(document).ready(function () {
                         relateObject.showMinmassage = ko.observable("");
                         pageList.splice(that.queindex + 1, 0, relateObject);
 
-                        //赋值题目总和
-                        var sumcount = viewModel.questionSum();
-                        viewModel.questionSum(sumcount + 1);
+                       
 
                     } else {
                         pageList.splice($.inArray(list[0], pageList), 1);
-                        var sumcount = viewModel.questionSum();
-                        viewModel.questionSum(sumcount - 1);
+                    
                     }
                     viewModel.getPageList();
+
+                    //设置矩阵题样式
+                    viewModel.SetMatrixList();
                 }
             }, 0);
             viewModel.saveAnswerlocalStorage();
@@ -539,7 +557,11 @@ $(document).ready(function () {
 
         //缓存当前页
         saveAnswerlocalStorage: function () {
+
+            var type = this.type;                   //判断是否是矩阵题题型
+            var parentData = this.parentData;       //存放当前矩阵题所有数据
             var pdata = this.pdata;
+
              setTimeout(function () {
                  var op = viewModel.getAnswerList();
                  var questionListAnswer = viewModel.questionListAnswer().concat();
@@ -645,7 +667,35 @@ $(document).ready(function () {
                 //document.cookie = curkey + "=" + escape(JSON.stringify(contenttemp)) + ";expires=7";                
                 viewModel.setCookie(curkey, JSON.stringify(contenttemp));
                  }
-            }, 100);
+             }, 100);
+
+
+            //如果是矩阵题进行判断
+             if (type == 5) {
+                 if (parentData.isrequired) {
+                     //存放一共有多少矩阵选项(行*列)
+                     var oNum = parentData.topdepartoption.length * parentData.selectoption.length;
+                     //存放矩阵选项
+                     var selects = parentData.selectoption;
+                     //已填答矩阵题选项统计
+                     var oCount = 0;
+
+                     for (var i = 0; i < selects.length; i++) {
+                         for (var j = 0; j < selects[i].option.length; j++) {
+                             var oCheck=selects[i].option[j].checkoption;
+                             if (oCheck !== undefined && oCheck() !== undefined && oCheck!==null) {
+                                 oCount++;
+                             }
+                         }
+                     }
+
+                     if (oCount === oNum) {
+                         $("#matrix_error" + parentData.id).hide();
+                     }
+
+                 }
+             }
+
         
             return true;
           
@@ -690,7 +740,7 @@ $(document).ready(function () {
             }
 
             //翻页首先隐藏矩阵题滚动条
-            Matrix.MatrixHideScrollBar();
+            //Matrix.MatrixHideScrollBar();
 
             //viewModel.clearlocalStorage(__curQuestion);
             window.parent.scrollTo(0, 0);
@@ -764,6 +814,9 @@ $(document).ready(function () {
                         __prevIndex.push({ curQuestionnaire: curQuestionnaire, curQuestion: curQuestion, curQuestionIndex: __curQuestionIndex });
                         this.getPageList();
 
+                        //设置矩阵题样式
+                        viewModel.SetMatrixList();
+
 
                     }
                 }
@@ -797,6 +850,9 @@ $(document).ready(function () {
                 __curQuestionIndex = curQuestionIndex;
             }
             this.getPageList();
+
+            //设置矩阵题样式
+            viewModel.SetMatrixList();
 
         },
         //提交答案,答题结束
@@ -1023,7 +1079,8 @@ $(document).ready(function () {
                 else if (list[i].questiontype == 5)
                 {                   
                     var answe = viewModel.getMatrixTypeAnswer(list[i].selectoption);
-                    answerList[list[i].id] = answe
+                    if (answe.length>0)
+                    answerList[list[i].id]= answe
                 }
 
             }
@@ -1054,11 +1111,12 @@ $(document).ready(function () {
                     var columndata = {};
                     columndata.topid = option[j].topdepartmentid;
                     columndata.checkid = option[j].checkoption;
-                    row.column[j] = columndata;
-                    //if (option[j].checkoption != null) {
-                    //    row.column[row.column.length] = columndata;
-                    //}
+                    //row.column[j] = columndata;
+                    if (option[j].checkoption != null) {
+                       row.column[j] = columndata; 
+                    }
                 }
+                if (row.column.length>0)
                 anser[i] = row;
             }
             return anser;
@@ -1149,7 +1207,7 @@ $(document).ready(function () {
                                 that.showPrev(true);
                             else
                                 that.showPrev(true);
-                         
+
                             viewModel.bindAnswerList(result.info);
                         }
                         else {
@@ -1187,7 +1245,7 @@ $(document).ready(function () {
                                     question.questionId = p;
                                     questiinlist[questiinlist.length] = question;
                                     viewModel.questionListAnswer(questiinlist);
-                                    questioncount += 1;
+                                
                                 }
                             }
                         for (var p = 0; p < bindPage.length; p++) {
@@ -1196,10 +1254,11 @@ $(document).ready(function () {
                                 if (bindPage[p].questiontype == 0) {
 
                                     bindPage[p].checkoption(answerValue[bindPage[p].id]);
+                                    questioncount += 1;
                                 }
                                 else if (bindPage[p].questiontype == 1) {
                                     bindPage[p].checkoption(answerValue[bindPage[p].id]);
-
+                                    questioncount += 1;
                                     //判断是否有相关问题
                                     if (bindPage[p].checkoption().length > 0) {
                                         var checkq = bindPage[p].checkoption();
@@ -1225,7 +1284,7 @@ $(document).ready(function () {
                                 }
                                 else if (bindPage[p].questiontype == 2) {
                                     //是否有选项
-
+                                    questioncount += 1;
                                     var bindOption = bindPage[p].option;
                                     var checkId = [];
                                     if (bindOption.length > 0) {
@@ -1246,7 +1305,7 @@ $(document).ready(function () {
                                     bindPage[p].checkoption(checkId);
                                 }
                                 else if (bindPage[p].questiontype == 3) {
-
+                                    questioncount += 1;
                                     var bindOption = bindPage[p].option;
                                     for (var bo = 0; bo < bindOption.length; bo++) {
                                         bindOption[bo].anslist(answerValue[bindPage[p].id][bo][bindOption[bo].id]);
@@ -1255,21 +1314,27 @@ $(document).ready(function () {
                                 }
                                 else if (bindPage[p].questiontype == 5) {
                                     var data = bindPage[p];
-                                    var rows = data.selectoption;
+                                                                       
                                     var answerlist = answerValue[bindPage[p].id];
-                                    for (var i = 0; i < rows.length; i++)
-                                    {
-                                        var columns = rows[i].option;
+                                    questioncount += 1;
+                                    var count = -1;
+                                    for (var i = 0; i < data.leftdepartoption.length; i++) {
                                         if (answerlist[i] == null) continue;
-                                        for (var j = 0; j < columns.length; j++)
-                                        {
+                                        count++;
+                                        data.selectcheckbox.push(data.leftdepartoption[i].questionid);
+                                        viewModel.SetMatrixChangeOption(p, data.leftdepartoption[i]);                                    
+                                     
+                                        var countt = -1;
+                                        for (var j = 0; j < data.topdepartoption.length; j++) {
                                             if (answerlist[i].column[j] == null) continue;
+                                            countt++;
                                             var checkid = answerlist[i].column[j].checkid;
-                                            columns[j].checkoption(checkid);
-                                        }
+                                            data.selectoption[count].option[countt].checkoption(checkid)
+                                        }                                     
                                     }
 
-
+                                    //设置矩阵题样式
+                                    viewModel.SetMatrixList();
                                 }
                             }
 
@@ -1278,6 +1343,12 @@ $(document).ready(function () {
                     }
                 }
             }
+            var percent = Math.floor((questioncount / viewModel.questionSum()) * 100);
+            if (percent > 100) {
+                percent = 100;
+            }
+            //有逻辑题的情况下及时答完也不会是百分百
+            viewModel.currentProgress(percent);
       
 
         }
@@ -1294,7 +1365,7 @@ $(document).ready(function () {
         async: false,
         data: JSON.stringify({ projectId: __projectId, clientCode: __clientCode, userCode: __userCode, deviceId: viewModel.getDeviceId(), language: __language }),
         success: function (result) {
-            //console.log(result.data.Questionnaire);
+            console.log(result.data.Questionnaire);
             if (result.success) {
                 //加绑定值的属性
                 var pageList = result.data.Questionnaire; 
@@ -1359,16 +1430,9 @@ $(document).ready(function () {
 
                                 if (pobject.questiontype == 5) {        //矩阵题
                                     //对矩阵题数据进行处理（同其他题型处理类似，为了存储提交的选项答案）
-                                    if (pobject.selectoption == null)
-                                    {
-                                        pobject.selectoption = [];
-                                        pobject.topdepartoption = [];
-                                        pobject.leftdepartoption = [];
-                                    }
-
-                                    if (pobject.selectoption != null && pobject.selectoption.length > 0) {
-                                        Matrix.ProcessMatrixData(pobject);
-                                    }
+                                    pobject.selectoption = [];
+                                    Matrix.ProcessMatrixData(pobject);
+                                 
 
                                 }
 
@@ -1384,8 +1448,9 @@ $(document).ready(function () {
                 //赋值题目总和
                 that.questionSum(sumcount);
                 __listData = pageList;
-                viewModel.getAnswerRecord();
                 viewModel.getPageList();
+                viewModel.getAnswerRecord();
+              
                 setTimeout(function () {
                     $(".wrapper").show();
                     $('.vx-load').hide();
